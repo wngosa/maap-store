@@ -5,9 +5,12 @@ app:
   build: .
   links:
     - db
+  env_file: docker-env.env
+  command: /bin/sh -c './bin/update && bundle exec rails s -p 3000 -b "0.0.0.0"'
 
 db:
   image: postgres:11.3
   restart: always
   environment:
+    POSTGRES_USER: postgres
     POSTGRES_PASSWORD: 11111111
