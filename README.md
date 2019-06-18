@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/instedd/maap-store.svg?branch=master)](https://travis-ci.org/instedd/maap-store)
+
 # Maap Store
 
 ## Development environment
