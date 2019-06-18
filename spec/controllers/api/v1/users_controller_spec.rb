@@ -2,7 +2,6 @@ require 'rails_helper'
 
 RSpec.describe Api::V1::UsersController, type: :controller do
   describe 'GET /me' do
-
     context 'with an unauthenticated user' do
       before { get :me }
 

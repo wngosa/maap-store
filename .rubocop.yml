@@ -11,13 +11,14 @@ Rails:
 
 AllCops:
   Exclude:
-    - spec/support/spec_helper.rb
+    - spec/support/*
     - spec/rails_helper.rb
     - db/**/*
     - docs/**/*
     - config/**/*
     - bin/**/*
     - tmp/**/*
+    - Guardfile
 
 
 Documentation:
