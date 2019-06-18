@@ -11,12 +11,17 @@ rescue ActiveRecord::PendingMigrationError => e
   puts e.to_s.strip
   exit 1
 end
-RSpec.configure do |config|
-  config.include FactoryBot::Syntax::Methods
+
+Dir[Rails.root.join('spec/support/**/*.rb')].each { |f| require f }
+Shoulda::Matchers.configure do |config|
   config.integrate do |with|
     with.test_framework :rspec
     with.library :rails
   end
+end
+RSpec.configure do |config|
+  config.include Devise::Test::ControllerHelpers, type: :controller
+  config.include FactoryBot::Syntax::Methods
   config.before(:suite) do
     DatabaseCleaner.strategy = :transaction
     DatabaseCleaner.clean_with(:truncation)
