@@ -17,12 +17,14 @@ Open [http://localhost:3000](http://localhost:3000).
 
 ```
 # Open a terminal in the web server directory
-$ docker-compose exec app bash
+$ docker-compose run app bash
 
 # Run linter and autofixes if needed
-$ docker-compose exec app bundle exec rubocop -a
+$ docker-compose run app bundle exec rubocop -a
 
 # Run tests
-$ docker-compose exec app bundle exec rspec
+$ docker-compose run app bundle exec rspec
 
+# Run seeds
+$ docker-compose run app bundle exec rails db:seed
 ```
