@@ -11,6 +11,10 @@ gem 'rails', '~> 5.1.7'
 gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
 
+gem 'active_model_serializers', '~> 0.10.0'
+gem 'devise'
+gem 'devise_token_auth'
+
 group :development, :test do
   gem 'pry-rails'
 
@@ -19,12 +23,15 @@ group :development, :test do
   gem 'rubocop-rails'
 
   gem 'database_cleaner'
-  gem 'factory_bot'
+  gem 'factory_bot_rails'
   gem 'faker'
   gem 'ffaker'
   gem 'rspec'
   gem 'rspec-rails'
   gem 'shoulda-matchers'
+
+  gem 'guard'
+  gem 'guard-rspec'
 end
 
 group :development do
