@@ -29,6 +29,7 @@ group :development, :test do
   gem 'rspec'
   gem 'rspec-rails'
   gem 'shoulda-matchers'
+  gem 'simplecov', require: false
 
   gem 'guard'
   gem 'guard-rspec'
