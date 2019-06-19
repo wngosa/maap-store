@@ -1,5 +1,15 @@
 require 'spec_helper'
 ENV['RAILS_ENV'] ||= 'test'
+require 'simplecov'
+SimpleCov.start 'rails' do
+  add_filter '/app/mailers/'
+  add_filter '/app/jobs/application_job.rb'
+
+  add_group "Serializers", "app/serializers"
+
+end
+SimpleCov.minimum_coverage 90
+SimpleCov.minimum_coverage_by_file 80
 require File.expand_path('../../config/environment', __FILE__)
 if Rails.env.production?
   abort("The Rails environment is running in production mode!")

@@ -10,6 +10,11 @@
 ```
 $ docker-compose up
 ```
+* Run seeds:
+
+```
+$ docker-compose up
+```
 
 Open [http://localhost:3000](http://localhost:3000).
 
