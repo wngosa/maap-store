@@ -4,6 +4,7 @@ require 'simplecov'
 SimpleCov.start 'rails' do
   add_filter '/app/mailers/'
   add_filter '/app/jobs/application_job.rb'
+  add_filter '/app/admin'
 
   add_group "Serializers", "app/serializers"
 
