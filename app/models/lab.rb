@@ -1,5 +1,5 @@
 class Lab < ApplicationRecord
-  OWNERSHIPS = %w[a b].freeze
+  OWNERSHIPS = %w[public private].freeze
 
   validates :name, :address, :location, presence: true
 end
