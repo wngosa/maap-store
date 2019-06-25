@@ -12,9 +12,9 @@ gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
 
 gem 'active_model_serializers', '~> 0.10.0'
+gem 'activeadmin'
 gem 'devise'
 gem 'devise_token_auth'
-gem 'activeadmin'
 gem 'kaminari'
 
 group :development, :test do
