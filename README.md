@@ -13,7 +13,7 @@ $ docker-compose up
 * Run seeds:
 
 ```
-$ docker-compose up
+$ docker-compose run --rm app bundle exec rails db:seed
 ```
 
 Open [http://localhost:3000](http://localhost:3000).
@@ -28,8 +28,8 @@ $ docker-compose run app bash
 $ docker-compose run app bundle exec rubocop -a
 
 # Run tests
-$ docker-compose run app bundle exec rspec
+$ docker-compose run --rm app bundle exec rspec
 
 # Run seeds
-$ docker-compose run app bundle exec rails db:seed
+$ docker-compose run --rm app bundle exec rails db:seed
 ```
