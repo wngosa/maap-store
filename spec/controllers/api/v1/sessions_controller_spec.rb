@@ -23,7 +23,7 @@ RSpec.describe Api::V1::SessionsController, type: :controller do
 
       it 'responds with the current user info' do
         expect(response_body.keys).to eq(%i[access-token token-type
-                                            client expiry uid])
+                                            client expiry uid id])
       end
     end
   end
