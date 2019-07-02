@@ -13,6 +13,7 @@ Rails.application.routes.draw do
         end
       end
       resources :labs, only: [:index]
+      resources :specimen_sources, only: [:index]
     end
   end
 end
