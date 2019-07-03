@@ -15,7 +15,7 @@ RSpec.describe Api::V1::LabsController, type: :controller do
       let!(:labs) { create_list :lab, 10 }
       before do
         authenticate(user)
-        get :index
+        post :index
       end
 
       it 'responds ok' do
@@ -23,6 +23,23 @@ RSpec.describe Api::V1::LabsController, type: :controller do
       end
 
       it_behaves_like 'a paginated request', Lab.all
+    end
+  end
+
+  describe 'POST /labs' do
+    context 'with an unauthenticated user' do
+      before { post :create }
+
+      it 'should respond unauthorized' do
+        expect(response).to have_http_status(:unauthorized)
+      end
+    end
+
+    context 'with an authenticated user' do
+      before { authenticate(user) }
+      let(:user) { create :user }
+
+      it_behaves_like 'a create endpoint', Lab, :create, :name
     end
   end
 end
