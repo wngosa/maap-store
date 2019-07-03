@@ -3,8 +3,19 @@ user = User.find_or_create_by(email: 'example@maap.tld') do |u|
 end
 AdminUser.create(email: 'admin@maap.tld', password: 'password', password_confirmation: 'password')
 
-FactoryBot::create_list(:lab, 10 - Lab.count)
+FactoryBot::create_list(:lab, [0, 10 - Lab.count].max) 
 
 # Patch for devise token auth model. 
 # It's only needed if you are in the context of the initial migration for uses
 User.find(user.id).update(tokens: nil)
+
+path = Rails.root.join('lib', 'seeds', "Documents.csv")
+
+CSV.foreach(
+  Rails.root.join('db', 'seeds', "specimen_source.csv"), 
+  headers: true
+) do |row|
+  SpecimenSource.find_or_create_by(
+    name: row['name']
+  )
+end
