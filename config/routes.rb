@@ -12,7 +12,7 @@ Rails.application.routes.draw do
           get :me
         end
       end
-      resources :labs, only: [:index]
+      resources :labs, only: [:index, :create]
       resources :specimen_sources, only: [:index]
     end
   end

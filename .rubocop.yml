@@ -24,6 +24,9 @@ AllCops:
 Documentation:
   Enabled: false
 
+Lint/Void:
+  Exclude:
+    - spec/support/**/*
 
 HasAndBelongsToMany:
   Enabled: false
@@ -34,3 +37,5 @@ Metrics/BlockLength:
 
 Style/FrozenStringLiteralComment:
   Enabled: false
+
+
