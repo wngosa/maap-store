@@ -14,6 +14,7 @@ Rails.application.routes.draw do
       end
       resources :labs, only: [:index, :create]
       resources :specimen_sources, only: [:index]
+      resources :culture_types, only: [:index]
     end
   end
 end
