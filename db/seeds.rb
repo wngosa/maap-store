@@ -19,3 +19,12 @@ CSV.foreach(
     name: row['name']
   )
 end
+
+CSV.foreach(
+  Rails.root.join('db', 'seeds', "culture_type.csv"), 
+  headers: true
+) do |row|
+  CultureType.find_or_create_by(
+    name: row['name']
+  )
+end
