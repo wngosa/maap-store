@@ -20,19 +20,6 @@ ADD . /app
 # Precompile assets
 RUN bundle exec rake assets:precompile RAILS_ENV=production SECRET_KEY_BASE=secret
 
-FROM ruby:2.5.3
-
-WORKDIR /app
-
-RUN gem install bundler
-
-ADD Gemfile /app/
-ADD Gemfile.lock /app/
-
-RUN bundle install
-
-ADD . /app
-
 ENV RAILS_SERVE_STATIC_FILES true
 ENV RAILS_LOG_TO_STDOUT true
 
