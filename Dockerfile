@@ -1,10 +1,26 @@
-FROM ruby:2.5.3
+FROM ruby:2.5.3-alpine as build
 
-RUN \
-  apt-get update && \
-  curl -sL https://deb.nodesource.com/setup_6.x | bash - && \
-  apt-get install -y nodejs build-essential libpq-dev && \
-  apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+# Install gem bundle
+ADD Gemfile /app/
+ADD Gemfile.lock /app/
+WORKDIR /app
+
+# Install required packages
+RUN apk add --no-cache build-base nodejs git mysql-dev postgresql-dev tzdata
+
+# Upgrades bundler versions
+RUN gem install bundler
+
+# Install gems
+RUN bundle install --jobs 10 --without development test
+
+# Install the application
+ADD . /app
+
+# Precompile assets
+RUN bundle exec rake assets:precompile RAILS_ENV=production SECRET_KEY_BASE=secret
+
+FROM ruby:2.5.3
 
 WORKDIR /app
 
