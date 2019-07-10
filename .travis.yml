@@ -10,3 +10,9 @@ script:
   - bundle exec rspec
 notifications:
   email: false
+
+deploy:
+  provider: script
+  script: "./build.sh"
+  on:
+    all_branches: true
