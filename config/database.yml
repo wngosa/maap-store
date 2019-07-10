@@ -16,6 +16,7 @@ test:
 
 production:
   <<: *default
-  database: maap-store_production
-  username: maap-store
-  password: <%= ENV['MAAP-STORE_DATABASE_PASSWORD'] %>
+  database: <%= ENV['DATABASE_NAME'] %>
+  host: <%= ENV['DATABASE_HOST'] %>
+  password: <%= ENV['DATABASE_PASSWORD'] %>
+  username: <%= ENV['DATABASE_USERNAME'] %>
