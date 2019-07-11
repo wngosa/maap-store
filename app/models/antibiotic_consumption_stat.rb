@@ -1,0 +1,2 @@
+class AntibioticConsumptionStat < ApplicationRecord
+end
