@@ -16,6 +16,7 @@ Rails.application.routes.draw do
       resources :specimen_sources, only: [:index]
       resources :culture_types, only: [:index]
       resources :antibiotic_consumption_stats, only: [:index]
+      resources :antibiotics, only: [:index, :create]
     end
   end
 end
