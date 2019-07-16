@@ -13,6 +13,12 @@ module Api
       def parameter_missing(error)
         render json: { error: error }, status: :bad_request
       end
+
+      def filter(collection)
+        s = collection
+        s = s.where('updated_at > ?', params[:updated_at_gth]) if params[:updated_at_gth].present? # rubocop:disable Metrics/LineLength
+        s
+      end
     end
   end
 end
