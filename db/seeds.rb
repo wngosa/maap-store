@@ -4,6 +4,8 @@ end
 AdminUser.create(email: 'admin@maap.tld', password: 'password', password_confirmation: 'password')
 
 FactoryBot::create_list(:lab, [0, 10 - Lab.count].max) 
+FactoryBot::create_list(:antibiotic, [0, 10 - Antibiotic.count].max) 
+FactoryBot::create_list(:antibiotic_consumption_stat, [0, 10 - AntibioticConsumptionStat.count].max) 
 
 # Patch for devise token auth model. 
 # It's only needed if you are in the context of the initial migration for uses

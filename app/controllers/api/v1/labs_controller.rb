@@ -2,7 +2,7 @@ module Api
   module V1
     class LabsController < ApiController
       def index
-        render_paginated Lab.all
+        render_paginated filter(Lab.all)
       end
 
       def create

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190705163829) do
+ActiveRecord::Schema.define(version: 20190716185528) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -39,6 +39,30 @@ ActiveRecord::Schema.define(version: 20190705163829) do
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_admin_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true
+  end
+
+  create_table "antibiotic_consumption_stats", force: :cascade do |t|
+    t.datetime "date"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "antibiotic_id"
+    t.boolean "issued"
+    t.integer "quantity"
+    t.integer "balance"
+    t.string "recipient_facility"
+    t.string "recipient_unit"
+    t.index ["antibiotic_id"], name: "index_antibiotic_consumption_stats_on_antibiotic_id"
+  end
+
+  create_table "antibiotics", force: :cascade do |t|
+    t.string "name"
+    t.string "strength_value"
+    t.string "strength_unit"
+    t.string "form"
+    t.string "pack_size"
+    t.string "brand"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "culture_types", force: :cascade do |t|
@@ -85,4 +109,5 @@ ActiveRecord::Schema.define(version: 20190705163829) do
     t.index ["uid", "provider"], name: "index_users_on_uid_and_provider", unique: true
   end
 
+  add_foreign_key "antibiotic_consumption_stats", "antibiotics"
 end
