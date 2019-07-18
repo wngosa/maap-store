@@ -1,5 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe AntibioticConsumptionStat, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  subject { build :antibiotic_consumption_stat }
+
+  it { is_expected.to be_valid }
+
+  it { is_expected.to belong_to(:antibiotic).required }
 end

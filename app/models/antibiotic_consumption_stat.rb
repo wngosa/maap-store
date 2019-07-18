@@ -1,3 +1,3 @@
 class AntibioticConsumptionStat < ApplicationRecord
-  belongs_to :antibiotic
+  belongs_to :antibiotic, optional: false
 end

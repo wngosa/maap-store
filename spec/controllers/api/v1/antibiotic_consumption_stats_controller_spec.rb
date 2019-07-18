@@ -27,4 +27,23 @@ RSpec.describe Api::V1::AntibioticConsumptionStatsController, type: :controller 
       it_behaves_like 'a paginated request', AntibioticConsumptionStat.all
     end
   end
+
+  describe 'POST /antibiotic_consumption_stats' do
+    context 'with an unauthenticated user' do
+      before { post :create }
+
+      it 'should respond unauthorized' do
+        expect(response).to have_http_status(:unauthorized)
+      end
+    end
+
+    context 'with an authenticated user' do
+      before { authenticate(user) }
+      let(:user) { create :user }
+
+      it_behaves_like(
+        'a create endpoint', AntibioticConsumptionStat, :create, :antibiotic_id
+      )
+    end
+  end
 end

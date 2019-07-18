@@ -10,7 +10,9 @@ module Api
         if antibiotic.save
           render json: antibiotic, status: :created
         else
-          render json: { errors: antibiotic.errors }, status: :unprocessable_entity
+          render json: {
+            errors: antibiotic.errors
+          }, status: :unprocessable_entity
         end
       end
 
