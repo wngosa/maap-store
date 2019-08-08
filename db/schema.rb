@@ -10,10 +10,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_08_165353) do
+ActiveRecord::Schema.define(version: 2019_08_08_205915) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "active_admin_comments", force: :cascade do |t|
+    t.string "namespace"
+    t.text "body"
+    t.string "resource_type"
+    t.bigint "resource_id"
+    t.string "author_type"
+    t.bigint "author_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["author_type", "author_id"], name: "index_active_admin_comments_on_author_type_and_author_id"
+    t.index ["namespace"], name: "index_active_admin_comments_on_namespace"
+    t.index ["resource_type", "resource_id"], name: "index_active_admin_comments_on_resource_type_and_resource_id"
+  end
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -92,6 +106,28 @@ ActiveRecord::Schema.define(version: 2019_08_08_165353) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "patient_id_hashes", force: :cascade do |t|
+    t.string "patient_id"
+    t.string "hashed_value"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "lab_id"
+    t.index ["lab_id"], name: "index_patient_id_hashes_on_lab_id"
+    t.index ["patient_id"], name: "index_patient_id_hashes_on_patient_id"
+  end
+
+  create_table "patients", force: :cascade do |t|
+    t.string "gender"
+    t.integer "year_of_birth"
+    t.string "level_of_education"
+    t.string "patient_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "lab_id"
+    t.string "patient_id_state", default: "pending"
+    t.index ["lab_id"], name: "index_patients_on_lab_id"
+  end
+
   create_table "sites", force: :cascade do |t|
     t.string "name"
     t.string "address"
@@ -131,4 +167,6 @@ ActiveRecord::Schema.define(version: 2019_08_08_165353) do
   end
 
   add_foreign_key "antibiotic_consumption_stats", "antibiotics"
+  add_foreign_key "patient_id_hashes", "sites", column: "lab_id"
+  add_foreign_key "patients", "sites", column: "lab_id"
 end
