@@ -1,8 +1,12 @@
+require 'sidekiq/web'
+
 Rails.application.routes.draw do
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
 
   devise_for :users
+
+  mount Sidekiq::Web => '/sidekiq'
   namespace :api do
     namespace :v1 do
       mount_devise_token_auth_for 'User', at: 'auth', controllers: { sessions: 'api/v1/sessions' }
@@ -13,6 +17,7 @@ Rails.application.routes.draw do
         end
       end
       resources :labs, only: [:index, :create]
+      resources :lab_records, only: [:create]
       resources :specimen_sources, only: [:index]
       resources :culture_types, only: [:index]
       resources :antibiotic_consumption_stats, only: [:index, :create]
