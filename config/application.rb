@@ -30,7 +30,6 @@ module MaapStore
     config.middleware.use ActionDispatch::Cookies
     config.middleware.use ActionDispatch::Session::CookieStore
     config.middleware.use Rack::MethodOverride
-    config.active_storage.service = :local
     # config.middleware.use Rack::MethodOverride
   end
 end
