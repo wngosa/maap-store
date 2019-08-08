@@ -15,9 +15,10 @@ module Api
       end
 
       def filter(collection)
-        s = collection
-        s = s.where('updated_at > ?', params[:updated_at_gth]) if params[:updated_at_gth].present? # rubocop:disable Metrics/LineLength
-        s
+        original_scope = collection.order(id: :asc)
+        s = original_scope.where('updated_at > ?', params[:updated_at_gth]) if params[:updated_at_gth].present? # rubocop:disable Metrics/LineLength
+        s = s.or(original_scope.where('id > ?', params[:id_gth])) if params[:id_gth].present? # rubocop:disable Metrics/LineLength
+        s || original_scope
       end
     end
   end

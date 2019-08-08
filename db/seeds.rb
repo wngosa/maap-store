@@ -30,3 +30,13 @@ CSV.foreach(
     name: row['name']
   )
 end
+
+CSV.foreach(
+  Rails.root.join('db', 'seeds', "antibiotics.csv"), 
+  headers: true
+) do |row|
+  Antibiotic.find_or_create_by(
+    name: row['name'],
+    who_atc_index: row['who_atc_index']
+  )
+end
