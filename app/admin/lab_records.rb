@@ -1,4 +1,4 @@
-ActiveAdmin.register AntibioticConsumptionStat do
+ActiveAdmin.register LabRecord do
   # See permitted parameters documentation:
   # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
   #
@@ -11,4 +11,13 @@ ActiveAdmin.register AntibioticConsumptionStat do
   #   permitted << :other if params[:action] == 'create' && current_user.admin?
   #   permitted
   # end
+
+  index do
+    column :id
+    column :file do |lab_record|
+      link_to 'Download',
+              rails_blob_path(lab_record.sheet_file, disposition: 'attachment'),
+              download: true
+    end
+  end
 end

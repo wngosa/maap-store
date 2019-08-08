@@ -9,10 +9,33 @@ services:
       dockerfile: Dockerfile-dev
     links:
       - db
+      - cache
     env_file: docker-env.env
     command: /bin/sh -c './bin/update && bundle exec rails s -p 3000 -b "0.0.0.0"'
     volumes:
       - .:/app
+    environment:
+      REDIS_URL: redis://cache
+
+  workers:
+    restart: always
+    build: 
+      context: .
+      dockerfile: Dockerfile-dev
+    links:
+      - db
+      - cache
+    env_file: docker-env.env
+    command: /bin/sh -c './bin/update && bundle exec sidekiq'
+    volumes:
+      - .:/app
+    environment:
+      REDIS_URL: redis://cache
+
+  cache:
+    image: redis
+    ports: 
+      - 6379:6379
 
   db:
     image: postgres:11.3
