@@ -61,7 +61,7 @@ module AnonymizeLabRecordFile
 
     def date_columns
       @date_columns ||=
-        context.lab_record.date.values.each_with_index.select { |c| c[0] }
+        context.lab_record.date.each_with_index.select { |c| c[0] }
     end
 
     def columns_to_offuscate
