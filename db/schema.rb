@@ -111,9 +111,9 @@ ActiveRecord::Schema.define(version: 2019_08_08_205915) do
     t.string "hashed_value"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "lab_id"
-    t.index ["lab_id"], name: "index_patient_id_hashes_on_lab_id"
+    t.bigint "site_id"
     t.index ["patient_id"], name: "index_patient_id_hashes_on_patient_id"
+    t.index ["site_id"], name: "index_patient_id_hashes_on_site_id"
   end
 
   create_table "patients", force: :cascade do |t|
@@ -123,9 +123,9 @@ ActiveRecord::Schema.define(version: 2019_08_08_205915) do
     t.string "patient_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "lab_id"
+    t.bigint "site_id"
     t.string "patient_id_state", default: "pending"
-    t.index ["lab_id"], name: "index_patients_on_lab_id"
+    t.index ["site_id"], name: "index_patients_on_site_id"
   end
 
   create_table "sites", force: :cascade do |t|
@@ -167,6 +167,6 @@ ActiveRecord::Schema.define(version: 2019_08_08_205915) do
   end
 
   add_foreign_key "antibiotic_consumption_stats", "antibiotics"
-  add_foreign_key "patient_id_hashes", "sites", column: "lab_id"
-  add_foreign_key "patients", "sites", column: "lab_id"
+  add_foreign_key "patient_id_hashes", "sites"
+  add_foreign_key "patients", "sites"
 end

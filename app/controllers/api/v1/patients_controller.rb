@@ -14,7 +14,7 @@ module Api
       private
 
       def permitted_params
-        params.require(:patient).permit(:patient_id, :gender, :lab_id)
+        params.require(:patient).permit(:patient_id, :gender, :site_id)
       end
     end
   end

@@ -4,7 +4,7 @@ module Patients
 
     def call
       context.patient = Patient.new(context.patient_params)
-      context.patient.patient_id = patient_id_hash.hashed_value
+      context.patient.patient_id = patient_id_hash&.hashed_value || patient_id
 
       context.patient.save!
     end
@@ -18,11 +18,7 @@ module Patients
     def patient_id_hash
       return context.patient_id_hash if context.patient_id_hash
 
-      context.patient_id_hash ||= 
-        PatientIdHash.find_or_initialize_by(patient_id: patient_id) do |instance|
-          instance.hashed_value = SecureRandom.uuid
-          instance.save
-        end
+      context.patient_id_hash ||= PatientIdHash.find_by(patient_id: patient_id)
     end
   end
 end
