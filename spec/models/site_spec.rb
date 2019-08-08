@@ -1,7 +1,7 @@
 require 'rails_helper'
 
-RSpec.describe Lab, type: :model do
-  subject { build :lab }
+RSpec.describe Site, type: :model do
+  subject { build :site }
 
   it { is_expected.to be_valid }
 

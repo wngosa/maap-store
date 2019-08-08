@@ -3,18 +3,18 @@ user = User.find_or_create_by(email: 'example@maap.tld') do |u|
 end
 AdminUser.create(email: 'admin@maap.tld', password: 'password', password_confirmation: 'password')
 
-FactoryBot::create_list(:lab, [0, 10 - Lab.count].max) 
-FactoryBot::create_list(:antibiotic, [0, 10 - Antibiotic.count].max) 
-FactoryBot::create_list(:antibiotic_consumption_stat, [0, 10 - AntibioticConsumptionStat.count].max) 
+FactoryBot::create_list(:site, [0, 10 - site.count].max)
+FactoryBot::create_list(:antibiotic, [0, 10 - Antibiotic.count].max)
+FactoryBot::create_list(:antibiotic_consumption_stat, [0, 10 - AntibioticConsumptionStat.count].max)
 
-# Patch for devise token auth model. 
+# Patch for devise token auth model.
 # It's only needed if you are in the context of the initial migration for uses
 User.find(user.id).update(tokens: nil)
 
 path = Rails.root.join('lib', 'seeds', "Documents.csv")
 
 CSV.foreach(
-  Rails.root.join('db', 'seeds', "specimen_source.csv"), 
+  Rails.root.join('db', 'seeds', "specimen_source.csv"),
   headers: true
 ) do |row|
   SpecimenSource.find_or_create_by(
@@ -23,7 +23,7 @@ CSV.foreach(
 end
 
 CSV.foreach(
-  Rails.root.join('db', 'seeds', "culture_type.csv"), 
+  Rails.root.join('db', 'seeds', "culture_type.csv"),
   headers: true
 ) do |row|
   CultureType.find_or_create_by(
@@ -32,7 +32,7 @@ CSV.foreach(
 end
 
 CSV.foreach(
-  Rails.root.join('db', 'seeds', "antibiotics.csv"), 
+  Rails.root.join('db', 'seeds', "antibiotics.csv"),
   headers: true
 ) do |row|
   Antibiotic.find_or_create_by(

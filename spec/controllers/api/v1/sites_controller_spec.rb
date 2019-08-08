@@ -1,7 +1,7 @@
 require 'rails_helper'
 
-RSpec.describe Api::V1::LabsController, type: :controller do
-  describe 'GET /labs' do
+RSpec.describe Api::V1::SitesController, type: :controller do
+  describe 'GET /sites' do
     context 'with an unauthenticated user' do
       before { get :index }
 
@@ -12,7 +12,7 @@ RSpec.describe Api::V1::LabsController, type: :controller do
 
     context 'with an authenticated user' do
       let(:user) { create :user }
-      let!(:labs) { create_list :lab, 10 }
+      let!(:sites) { create_list :site, 10 }
       before do
         authenticate(user)
         post :index
@@ -22,11 +22,11 @@ RSpec.describe Api::V1::LabsController, type: :controller do
         expect(response).to have_http_status(:ok)
       end
 
-      it_behaves_like 'a paginated request', Lab.all
+      it_behaves_like 'a paginated request', Site.all
     end
   end
 
-  describe 'POST /labs' do
+  describe 'POST /sites' do
     context 'with an unauthenticated user' do
       before { post :create }
 
@@ -39,7 +39,7 @@ RSpec.describe Api::V1::LabsController, type: :controller do
       before { authenticate(user) }
       let(:user) { create :user }
 
-      it_behaves_like 'a create endpoint', Lab, :create, :name
+      it_behaves_like 'a create endpoint', Site, :create, :name
     end
   end
 end
