@@ -1,6 +1,10 @@
 module Api
   module V1
-    class PatientsController < ApplicationController
+    class PatientsController < ApiController
+      def index
+        render_paginated filter(Patient.all)
+      end
+
       def create
         result = Patients::Create.call(patient_params: permitted_params)
 
