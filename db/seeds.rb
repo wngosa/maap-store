@@ -3,7 +3,7 @@ user = User.find_or_create_by(email: 'example@maap.tld') do |u|
 end
 AdminUser.create(email: 'admin@maap.tld', password: 'password', password_confirmation: 'password')
 
-FactoryBot::create_list(:site, [0, 10 - site.count].max)
+FactoryBot::create_list(:site, [0, 10 - Site.count].max)
 FactoryBot::create_list(:antibiotic, [0, 10 - Antibiotic.count].max)
 FactoryBot::create_list(:antibiotic_consumption_stat, [0, 10 - AntibioticConsumptionStat.count].max)
 
