@@ -11,6 +11,10 @@ module Patients
 
     private
 
+    def site_id
+      context.patient_params[:site_id]
+    end
+
     def patient_id
       context.patient_params[:patient_id]
     end
@@ -18,7 +22,8 @@ module Patients
     def patient_id_hash
       return context.patient_id_hash if context.patient_id_hash
 
-      context.patient_id_hash ||= PatientIdHash.find_by(patient_id: patient_id)
+      context.patient_id_hash ||= PatientIdHash.find_by(patient_id: patient_id,
+                                                        site_id: site_id)
     end
   end
 end
