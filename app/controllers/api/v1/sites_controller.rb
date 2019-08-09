@@ -20,7 +20,7 @@ module Api
         params.require(:site).permit(
           :name, :address, :location, :ownership, :has_farmacy,
           :identified_patients, :permanently_identified_patients,
-          :level, :teaching
+          :level, :teaching, :has_hospital, :has_laboratory
         )
       end
     end
