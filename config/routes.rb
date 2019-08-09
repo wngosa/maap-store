@@ -24,6 +24,7 @@ Rails.application.routes.draw do
       resources :antibiotics, only: [:index, :create]
       resources :patients, only: [:index, :create]
       resources :patient_entries, only: [:index, :create]
+      resources :clinical_services, only: [:index]
     end
   end
 end

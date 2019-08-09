@@ -40,3 +40,15 @@ CSV.foreach(
     who_atc_index: row['who_atc_index']
   )
 end
+
+[
+  "Medical",
+  "Surgical",
+  "Pediatric",
+  "Maternity and Gynaecological",
+  "Intensive Care",
+  "Emergency Services",
+  "Not mentioned"
+].each do |service|
+  ClinicalService.find_or_create_by(name: service)
+end
