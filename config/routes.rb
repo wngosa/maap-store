@@ -23,6 +23,7 @@ Rails.application.routes.draw do
       resources :antibiotic_consumption_stats, only: [:index, :create]
       resources :antibiotics, only: [:index, :create]
       resources :patients, only: [:index, :create]
+      resources :patient_records, only: [:index, :create]
     end
   end
 end

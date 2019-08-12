@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_12_152931) do
+ActiveRecord::Schema.define(version: 2019_08_12_202405) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -141,6 +141,13 @@ ActiveRecord::Schema.define(version: 2019_08_12_152931) do
     t.index ["site_id"], name: "index_patient_id_hashes_on_site_id"
   end
 
+  create_table "patient_records", force: :cascade do |t|
+    t.bigint "patient_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["patient_id"], name: "index_patient_records_on_patient_id"
+  end
+
   create_table "patients", force: :cascade do |t|
     t.string "gender"
     t.integer "year_of_birth"
@@ -199,5 +206,6 @@ ActiveRecord::Schema.define(version: 2019_08_12_152931) do
   add_foreign_key "lab_records", "lab_record_imports"
   add_foreign_key "lab_records", "sites"
   add_foreign_key "patient_id_hashes", "sites"
+  add_foreign_key "patient_records", "patients"
   add_foreign_key "patients", "sites"
 end
