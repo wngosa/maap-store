@@ -1,5 +1,4 @@
 require 'rails_helper'
-
-RSpec.describe LabRecord, type: :model do
+RSpec.describe AnonymizeLabRecordImportWorker, type: :worker do
   pending "add some examples to (or delete) #{__FILE__}"
 end

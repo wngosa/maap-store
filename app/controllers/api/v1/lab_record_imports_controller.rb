@@ -1,11 +1,11 @@
 module Api
   module V1
-    class LabRecordsController < ApplicationController
+    class LabRecordImportsController < ApplicationController
       def create
-        lab_record = LabRecord.new(permitted_params)
+        lab_record = LabRecordImport.new(permitted_params)
 
         if lab_record.save
-          AnonymizeLabRecordFileWorker.perform_async(lab_record.id)
+          AnonymizeLabRecordImportWorker.perform_async(lab_record.id)
           render json: lab_record, status: :created
         else
           render json: lab_record.errors, status: :unprocessable_entity

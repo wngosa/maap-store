@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_08_205915) do
+ActiveRecord::Schema.define(version: 2019_08_12_125831) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -93,7 +93,7 @@ ActiveRecord::Schema.define(version: 2019_08_08_205915) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "lab_records", force: :cascade do |t|
+  create_table "lab_record_imports", force: :cascade do |t|
     t.integer "header_row"
     t.integer "data_rows_from"
     t.integer "data_rows_to"

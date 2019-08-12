@@ -1,6 +1,6 @@
 require 'rubyXL/convenience_methods/cell'
 
-module AnonymizeLabRecordFile
+module AnonymizeLabRecordImport
   class RemoveFields
     include Interactor
 

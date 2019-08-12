@@ -1,4 +1,4 @@
-class LabRecord < ApplicationRecord
+class LabRecordImport < ApplicationRecord
   has_one_attached :sheet_file
   def rows
     JSON[self[:rows]]

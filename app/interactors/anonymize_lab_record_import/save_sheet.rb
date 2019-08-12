@@ -1,4 +1,4 @@
-module AnonymizeLabRecordFile
+module AnonymizeLabRecordImport
   class SaveSheet
     include Interactor
 
