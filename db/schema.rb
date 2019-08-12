@@ -163,6 +163,8 @@ ActiveRecord::Schema.define(version: 2019_08_12_152931) do
     t.boolean "permanently_identified_patients"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "level"
+    t.string "teaching"
   end
 
   create_table "specimen_sources", force: :cascade do |t|

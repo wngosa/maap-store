@@ -4,6 +4,8 @@ FactoryBot.define do
     address { FFaker::Address.street_address }
     location { "#{FFaker::Geolocation.lat}, #{FFaker::Geolocation.lng}" }
     ownership { Site::OWNERSHIPS.sample }
+    level { Site::LEVEL.sample }
+    teaching { Site::TEACHING.sample }
     has_farmacy { FFaker::Boolean.maybe }
     identified_patients { FFaker::Boolean.maybe }
     permanently_identified_patients { FFaker::Boolean.maybe }

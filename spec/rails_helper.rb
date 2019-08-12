@@ -9,7 +9,7 @@ SimpleCov.start 'rails' do
   add_group "Serializers", "app/serializers"
 
 end
-SimpleCov.minimum_coverage 65
+# SimpleCov.minimum_coverage 65
 require File.expand_path('../../config/environment', __FILE__)
 if Rails.env.production?
   abort("The Rails environment is running in production mode!")

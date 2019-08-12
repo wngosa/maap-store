@@ -5,8 +5,6 @@ module Api
         lab_record_import = build_lab_record_import
 
         if lab_record_import.save
-
-          # asd
           AnonymizeLabRecordImportWorker.perform_async(lab_record_import.id)
           render json: lab_record_import, status: :created
         else
