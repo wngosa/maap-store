@@ -8,7 +8,7 @@ module AnonymizeLabRecordImport
         io: File.open("#{context.sheet_path}.xlsx"),
         filename: 'Download.xlsx'
       )
-      context.lab_record.save
+      context.lab_record.save!
     end
   end
 end

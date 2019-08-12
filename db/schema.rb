@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_12_125831) do
+ActiveRecord::Schema.define(version: 2019_08_12_152931) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -93,6 +93,16 @@ ActiveRecord::Schema.define(version: 2019_08_12_125831) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "lab_record", force: :cascade do |t|
+    t.jsonb "content"
+    t.bigint "lab_record_import_id"
+    t.string "patient_id_state"
+    t.integer "row"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["lab_record_import_id"], name: "index_lab_record_on_lab_record_import_id"
+  end
+
   create_table "lab_record_imports", force: :cascade do |t|
     t.integer "header_row"
     t.integer "data_rows_from"
@@ -104,6 +114,21 @@ ActiveRecord::Schema.define(version: 2019_08_12_125831) do
     t.jsonb "date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "site_id"
+    t.index ["site_id"], name: "index_lab_record_imports_on_site_id"
+  end
+
+  create_table "lab_records", force: :cascade do |t|
+    t.jsonb "content"
+    t.bigint "lab_record_import_id"
+    t.bigint "site_id"
+    t.integer "patient_id_state", default: 0
+    t.integer "row"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "patient_id"
+    t.index ["lab_record_import_id"], name: "index_lab_records_on_lab_record_import_id"
+    t.index ["site_id"], name: "index_lab_records_on_site_id"
   end
 
   create_table "patient_id_hashes", force: :cascade do |t|
@@ -167,6 +192,10 @@ ActiveRecord::Schema.define(version: 2019_08_12_125831) do
   end
 
   add_foreign_key "antibiotic_consumption_stats", "antibiotics"
+  add_foreign_key "lab_record", "lab_record_imports"
+  add_foreign_key "lab_record_imports", "sites"
+  add_foreign_key "lab_records", "lab_record_imports"
+  add_foreign_key "lab_records", "sites"
   add_foreign_key "patient_id_hashes", "sites"
   add_foreign_key "patients", "sites"
 end

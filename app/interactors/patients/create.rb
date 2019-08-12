@@ -24,7 +24,7 @@ module Patients
     def patient_id_hash
       return context.patient_id_hash if context.patient_id_hash
 
-      context.patient_id_hash ||= 
+      context.patient_id_hash ||=
         PatientIdHash.find_by(patient_id: patient_id,
                               site_id: site_id)&.hashed_value || patient_id
     end

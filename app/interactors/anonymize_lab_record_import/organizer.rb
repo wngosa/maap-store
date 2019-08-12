@@ -3,6 +3,7 @@ module AnonymizeLabRecordImport
     include Interactor::Organizer
 
     organize AnonymizeLabRecordImport::ReadSheet,
+             AnonymizeLabRecordImport::ObfuscatePatientIds,
              AnonymizeLabRecordImport::RemoveFields,
              AnonymizeLabRecordImport::SaveSheet
   end

@@ -13,10 +13,12 @@ module AnonymizeLabRecordImport
     }.freeze
 
     def call # rubocop:disable Metrics/MethodLength, Metrics/AbcSize
+      return if context.patient_ids
+
       (first_row..last_row).to_a.each do |row_number|
         # TODO: Relation Patient ID
         columns_to_offuscate.each do |column_number|
-          update_cell(row_number - 1, column_number, OFFUSCATED_TEXT)
+          update_cell(row_number - 1, column_number, 'OFFUSCATED_TEXT')
         end
 
         date_columns.each do |column|
