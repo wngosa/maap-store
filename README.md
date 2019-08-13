@@ -16,7 +16,7 @@ $ docker-compose up
 $ docker-compose run --rm app bundle exec rails db:seed
 ```
 
-Open [http://localhost:3000](http://localhost:3000).
+Open [http://localhost:3000/admin](http://localhost:3000/admin)
 
 ### Useful commands
 
