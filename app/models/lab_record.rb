@@ -1,5 +1,6 @@
 class LabRecord < ApplicationRecord
   include PatientIdObfuscation
+  # attr_accessor :content
 
   enum patient_id_state: %w[pending obfuscated]
 
