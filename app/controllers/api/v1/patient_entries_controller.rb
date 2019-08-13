@@ -19,7 +19,7 @@ module Api
 
       def permitted_params
         params.require(:patient_entry)
-              .permit(:patient_id, :department, :admission_date, :discharge_date,
+              .permit(:patient_id, :department, :stay_timespan,
                       :weight, :height, :pregnancy_status, :premature_birth, :chief_complaint,
                       :patient_transferred, :primary_diagnosis, :primary_diagnosis_icd_code,
                       :acute_myocardial_infarction, :chf, :not_mentioned, :other,

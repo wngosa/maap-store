@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_13_133427) do
+ActiveRecord::Schema.define(version: 2019_08_13_145357) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -160,6 +160,7 @@ ActiveRecord::Schema.define(version: 2019_08_13_133427) do
     t.string "discharge_diagnostic"
     t.string "discharge_diagnostic_icd_code"
     t.string "patient_outcome_at_discharge"
+    t.bigint "stay_timespan"
     t.index ["patient_id"], name: "index_patient_entries_on_patient_id"
   end
 
