@@ -1,4 +1,4 @@
-module AnonymizeLabRecordFile
+module AnonymizeLabRecordImport
   class SaveSheet
     include Interactor
 
@@ -8,7 +8,7 @@ module AnonymizeLabRecordFile
         io: File.open("#{context.sheet_path}.xlsx"),
         filename: 'Download.xlsx'
       )
-      context.lab_record.save
+      context.lab_record.save!
     end
   end
 end

@@ -4,4 +4,6 @@ class Site < ApplicationRecord
   TEACHING = %w[teaching non_teaching unknown].freeze
 
   validates :name, :address, :location, presence: true
+  has_many :patient_id_hashes, dependent: :destroy
+  has_many :patients, dependent: :destroy
 end

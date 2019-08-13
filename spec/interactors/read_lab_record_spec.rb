@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-RSpec.describe AnonymizeLabRecordFile::ReadLabRecord, type: :interactor do
+RSpec.describe AnonymizeLabRecordImport::ReadLabRecord, type: :interactor do
   describe '.call' do
     pending "add some examples to (or delete) #{__FILE__}"
   end

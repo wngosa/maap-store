@@ -1,22 +1,8 @@
 class LabRecord < ApplicationRecord
-  has_one_attached :sheet_file
-  def rows
-    JSON[self[:rows]]
-  end
+  include PatientIdObfuscation
 
-  def columns
-    JSON[self[:columns]]
-  end
+  enum patient_id_state: %w[pending obfuscated]
 
-  def patient_or_lab_record_id
-    JSON[self[:patient_or_lab_record_id]]
-  end
-
-  def phi
-    JSON[self[:phi]]
-  end
-
-  def date
-    JSON[self[:date]]
-  end
+  belongs_to :lab_record_import
+  belongs_to :site
 end

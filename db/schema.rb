@@ -10,10 +10,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_08_203636) do
+ActiveRecord::Schema.define(version: 2019_08_12_152931) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "active_admin_comments", force: :cascade do |t|
+    t.string "namespace"
+    t.text "body"
+    t.string "resource_type"
+    t.bigint "resource_id"
+    t.string "author_type"
+    t.bigint "author_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["author_type", "author_id"], name: "index_active_admin_comments_on_author_type_and_author_id"
+    t.index ["namespace"], name: "index_active_admin_comments_on_namespace"
+    t.index ["resource_type", "resource_id"], name: "index_active_admin_comments_on_resource_type_and_resource_id"
+  end
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -79,7 +93,17 @@ ActiveRecord::Schema.define(version: 2019_08_08_203636) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "lab_records", force: :cascade do |t|
+  create_table "lab_record", force: :cascade do |t|
+    t.jsonb "content"
+    t.bigint "lab_record_import_id"
+    t.string "patient_id_state"
+    t.integer "row"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["lab_record_import_id"], name: "index_lab_record_on_lab_record_import_id"
+  end
+
+  create_table "lab_record_imports", force: :cascade do |t|
     t.integer "header_row"
     t.integer "data_rows_from"
     t.integer "data_rows_to"
@@ -90,6 +114,43 @@ ActiveRecord::Schema.define(version: 2019_08_08_203636) do
     t.jsonb "date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "site_id"
+    t.index ["site_id"], name: "index_lab_record_imports_on_site_id"
+  end
+
+  create_table "lab_records", force: :cascade do |t|
+    t.jsonb "content"
+    t.bigint "lab_record_import_id"
+    t.bigint "site_id"
+    t.integer "patient_id_state", default: 0
+    t.integer "row"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "patient_id"
+    t.index ["lab_record_import_id"], name: "index_lab_records_on_lab_record_import_id"
+    t.index ["site_id"], name: "index_lab_records_on_site_id"
+  end
+
+  create_table "patient_id_hashes", force: :cascade do |t|
+    t.string "patient_id"
+    t.string "hashed_value"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "site_id"
+    t.index ["patient_id"], name: "index_patient_id_hashes_on_patient_id"
+    t.index ["site_id"], name: "index_patient_id_hashes_on_site_id"
+  end
+
+  create_table "patients", force: :cascade do |t|
+    t.string "gender"
+    t.integer "year_of_birth"
+    t.string "level_of_education"
+    t.string "patient_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "site_id"
+    t.string "patient_id_state", default: "pending"
+    t.index ["site_id"], name: "index_patients_on_site_id"
   end
 
   create_table "sites", force: :cascade do |t|
@@ -133,4 +194,10 @@ ActiveRecord::Schema.define(version: 2019_08_08_203636) do
   end
 
   add_foreign_key "antibiotic_consumption_stats", "antibiotics"
+  add_foreign_key "lab_record", "lab_record_imports"
+  add_foreign_key "lab_record_imports", "sites"
+  add_foreign_key "lab_records", "lab_record_imports"
+  add_foreign_key "lab_records", "sites"
+  add_foreign_key "patient_id_hashes", "sites"
+  add_foreign_key "patients", "sites"
 end

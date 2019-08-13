@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-RSpec.describe AnonymizeLabRecordFile::RemoveFields, type: :interactor do
+RSpec.describe AnonymizeLabRecordImport::RemoveFields, type: :interactor do
   describe '.call' do
     pending "add some examples to (or delete) #{__FILE__}"
   end

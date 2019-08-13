@@ -1,4 +1,4 @@
-module AnonymizeLabRecordFile
+module AnonymizeLabRecordImport
   class ReadLabRecord
     include Interactor
 

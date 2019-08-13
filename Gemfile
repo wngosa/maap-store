@@ -19,6 +19,7 @@ gem 'interactor-rails'
 gem 'kaminari'
 gem 'rubyXL'
 gem 'sidekiq'
+gem 'sidekiq-scheduler'
 gem 'spreadsheet'
 
 group :development, :test do

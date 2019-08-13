@@ -1,4 +1,4 @@
-ActiveAdmin.register LabRecord do
+ActiveAdmin.register LabRecordImport do
   # See permitted parameters documentation:
   # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
   #
@@ -14,12 +14,10 @@ ActiveAdmin.register LabRecord do
 
   index do
     column :id
-    column :site
-    column :lab_record_import
-    column :row
-    column :created_at
-    column :patient_id
-
-    actions
+    column :file do |lab_record|
+      link_to 'Download',
+              rails_blob_path(lab_record.sheet_file, disposition: 'attachment'),
+              download: true
+    end
   end
 end
