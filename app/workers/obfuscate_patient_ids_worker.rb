@@ -22,7 +22,7 @@ class ObfuscatePatientIdsWorker
     end
   end
 
-  def obfuscate_lab_records
+  def obfuscate_lab_records # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
     lab_record_imports = Set.new
     LabRecord.obfuscation_pending.find_each do |lab_record|
       Rails.logger.info "Obfuscating lab record #{lab_record.id}"
