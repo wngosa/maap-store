@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_12_152931) do
+ActiveRecord::Schema.define(version: 2019_08_13_145357) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -131,6 +131,39 @@ ActiveRecord::Schema.define(version: 2019_08_12_152931) do
     t.index ["site_id"], name: "index_lab_records_on_site_id"
   end
 
+  create_table "patient_entries", force: :cascade do |t|
+    t.bigint "patient_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "location"
+    t.string "department"
+    t.string "admission_date"
+    t.string "discharge_date"
+    t.string "weight"
+    t.string "height"
+    t.boolean "pregnancy_status"
+    t.boolean "premature_birth"
+    t.string "chief_complaint"
+    t.boolean "patient_transferred"
+    t.string "primary_diagnosis"
+    t.string "primary_diagnosis_icd_code"
+    t.boolean "acute_myocardial_infarction"
+    t.boolean "chf"
+    t.boolean "not_mentioned"
+    t.boolean "other"
+    t.boolean "antibiotics_prescribed"
+    t.string "antibiotic"
+    t.string "antibiotic_consumption"
+    t.boolean "patient_was_on_an_indwelling_medical_device"
+    t.string "medical_device"
+    t.string "infection_acquisition"
+    t.string "discharge_diagnostic"
+    t.string "discharge_diagnostic_icd_code"
+    t.string "patient_outcome_at_discharge"
+    t.bigint "stay_timespan"
+    t.index ["patient_id"], name: "index_patient_entries_on_patient_id"
+  end
+
   create_table "patient_id_hashes", force: :cascade do |t|
     t.string "patient_id"
     t.string "hashed_value"
@@ -198,6 +231,7 @@ ActiveRecord::Schema.define(version: 2019_08_12_152931) do
   add_foreign_key "lab_record_imports", "sites"
   add_foreign_key "lab_records", "lab_record_imports"
   add_foreign_key "lab_records", "sites"
+  add_foreign_key "patient_entries", "patients"
   add_foreign_key "patient_id_hashes", "sites"
   add_foreign_key "patients", "sites"
 end
