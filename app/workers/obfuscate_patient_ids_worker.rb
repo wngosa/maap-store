@@ -33,6 +33,7 @@ class ObfuscatePatientIdsWorker
       lab_record.save!
       lab_record_imports << lab_record.lab_record_import_id
     end
+    Rails.logger.info 'Obfuscated lab records'
     lab_record_imports.uniq
   end
 
