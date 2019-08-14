@@ -16,9 +16,8 @@ module AnonymizeLabRecordImport
       return if context.patient_ids
 
       (first_row..last_row).to_a.each do |row_number|
-        # TODO: Relation Patient ID
         columns_to_offuscate.each do |column_number|
-          update_cell(row_number - 1, column_number, 'OFFUSCATED_TEXT')
+          update_cell(row_number - 1, column_number, OFFUSCATED_TEXT)
         end
 
         date_columns.each do |column|
@@ -68,7 +67,7 @@ module AnonymizeLabRecordImport
 
     def columns_to_offuscate
       @columns_to_offuscate ||=
-        context.lab_record.phi.each_with_index.select { |c| c[0] }.map(&:last)
+        context.lab_record.phi.values.each_with_index.select { |c| c[0] }.map(&:last)
     end
 
     def first_row
