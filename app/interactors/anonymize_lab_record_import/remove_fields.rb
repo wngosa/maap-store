@@ -65,8 +65,14 @@ module AnonymizeLabRecordImport
         context.lab_record.date.each_with_index.select { |c| c[0] }
     end
 
-    def columns_to_offuscate
-      @columns_to_offuscate ||=
+    def columns_to_offuscate # rubocop:disable Metrics/AbcSize
+      return @columns_to_offuscate if @columns_to_offuscate
+
+      if context.lab_record.phi.is_a? Array
+        return @columns_to_offuscate =
+                 context.lab_record.phi.each_with_index.select { |c| c[0] }.map(&:last)
+      end
+      @columns_to_offuscate =
         context.lab_record.phi.values.each_with_index.select { |c| c[0] }.map(&:last)
     end
 
