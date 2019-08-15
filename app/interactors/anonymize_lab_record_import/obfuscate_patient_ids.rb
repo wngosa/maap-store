@@ -4,18 +4,9 @@ module AnonymizeLabRecordImport
   class ObfuscatePatientIds
     include Interactor
 
-    def call # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
+    def call # rubocop:disable Metrics/AbcSize
       return unless context.patient_ids
 
-      header_cell =
-        read_cell(context.lab_record.header_row - 1, context.lab_record.patient_id_index).to_s
-      if header_cell.empty?
-        update_cell(
-          context.lab_record.header_row - 1,
-          context.lab_record.patient_id_index,
-          'Patient Id'
-        )
-      end
       context.lab_record.lab_records.obfuscated.order(row: :asc).each do |lab_record|
         Rails.logger.info "Lab record #{lab_record.id} #{lab_record.row}"
 
