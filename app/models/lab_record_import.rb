@@ -30,6 +30,6 @@ class LabRecordImport < ApplicationRecord
   end
 
   def patient_id_index
-    patient_or_lab_record_id.index('patientId').to_i
+    patient_or_lab_record_id.key('patientId').to_i
   end
 end

@@ -17,7 +17,7 @@ Rails.application.routes.draw do
         end
       end
       resources :sites, only: [:index, :create]
-      resources :lab_record_imports, only: [:create]
+      resources :lab_record_imports, only: [:create, :update]
       resources :specimen_sources, only: [:index]
       resources :culture_types, only: [:index]
       resources :antibiotic_consumption_stats, only: [:index, :create]
