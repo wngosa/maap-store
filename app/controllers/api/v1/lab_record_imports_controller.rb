@@ -12,6 +12,19 @@ module Api
         end
       end
 
+      def update
+        interactor = LabRecordImports::Update.call(
+          lab_record_import: LabRecordImport.find(params[:id]),
+          params: update_permitted_params
+        )
+
+        if interactor.success?
+          render json: interactor.lab_record_import, status: :accepted
+        else
+          render json: interactor.errors, status: :unprocessable_entity
+        end
+      end
+
       private
 
       def build_lab_record_import
@@ -23,6 +36,12 @@ module Api
           lab_record.patient_id = lab_record.content[lab_record_import.patient_id_index]['w']
         end
         lab_record_import
+      end
+
+      def update_permitted_params
+        params.tap do |whitelisted|
+          whitelisted[:rows] = params[:rows] if params[:rows]
+        end
       end
 
       def permitted_params # rubocop:disable Metrics/AbcSize, Metrics/CyclomaticComplexity
