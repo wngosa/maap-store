@@ -2,7 +2,7 @@ module AnonymizeLabRecordImport
   class SaveSheet
     include Interactor
 
-    def call
+    def call # rubocop:disable Metrics/AbcSize
       context.sheet_file.write("#{context.sheet_path}.xlsx")
       context.lab_record.sheet_file.attach(
         io: File.open("#{context.sheet_path}.xlsx"),
