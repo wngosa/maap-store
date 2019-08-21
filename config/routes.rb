@@ -23,8 +23,8 @@ Rails.application.routes.draw do
       resources :antibiotic_consumption_stats, only: [:index, :create]
       resources :antibiotics, only: [:index, :create]
       resources :patients, only: [:index, :create]
-      resources :patient_entries, only: [:index, :create]
       resources :clinical_services, only: [:index]
+      resources :patient_entries, only: [:index, :create, :update]
     end
   end
 end
