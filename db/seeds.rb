@@ -52,3 +52,13 @@ end
 ].each do |service|
   ClinicalService.find_or_create_by(name: service)
 end
+
+[
+  "Inpatient/Ward",
+  "ICU",
+  "Outpatient",
+  "Emergency",
+  "Not mentioned",
+].each do |location|
+  PatientLocation.find_or_create_by(name: location)
+end
