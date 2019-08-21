@@ -7,5 +7,6 @@ FactoryBot.define do
     recipient_unit { FFaker::HealthcareIpsum.word }
     recipient_facility { FFaker::HealthcareIpsum.word }
     date { '2019-07-11 10:53:22' }
+    site_id { create(:site).id }
   end
 end

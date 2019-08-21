@@ -22,7 +22,7 @@ module Api
       def permitted_params
         params.require(:antibiotic_consumption_stat).permit(
           :antibiotic_id, :recipient_facility, :issued, :quantity, :balance,
-          :recipient_unit, :date
+          :recipient_unit, :date, :site_id
         )
       end
     end
