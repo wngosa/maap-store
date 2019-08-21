@@ -6,7 +6,7 @@ module Api
       end
 
       def create
-        patient_entry = PatientEntry.new(permitted_params)
+        patient_entry = PatientEntry.new(create_permitted_params)
 
         if patient_entry.save
           render json: patient_entry, status: :created
@@ -15,9 +15,23 @@ module Api
         end
       end
 
+      def update
+        patient_entry = PatientEntry.find(params[:id])
+
+        if patient_entry.update(update_permitted_params)
+          render json: patient_entry, status: :accepted
+        else
+          render json: patient_entry.errors, status: :unprocessable_entity
+        end
+      end
+
       private
 
-      def permitted_params
+      def update_permitted_params
+        create_permitted_params
+      end
+
+      def create_permitted_params
         params.require(:patient_entry)
               .permit(:patient_id, :department, :stay_timespan,
                       :weight, :height, :pregnancy_status, :premature_birth, :chief_complaint,
