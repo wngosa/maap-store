@@ -17,7 +17,23 @@ module Api
         end
       end
 
+      def update
+        antibiotic_consumption_stat =
+          AntibioticConsumptionStat.find(params[:id])
+        if antibiotic_consumption_stat.update(update_permitted_params)
+          render json: antibiotic_consumption_stat, status: :accepted
+        else
+          render json: {
+            errors: antibiotic_consumption_stat.errors
+          }, status: :unprocessable_entity
+        end
+      end
+
       private
+
+      def update_permitted_params
+        permitted_params
+      end
 
       def permitted_params
         params.require(:antibiotic_consumption_stat).permit(
