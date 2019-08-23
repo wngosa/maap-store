@@ -22,7 +22,7 @@ Rails.application.routes.draw do
       resources :culture_types, only: [:index]
       resources :antibiotic_consumption_stats, only: [:index, :create, :update]
       resources :antibiotics, only: [:index, :create]
-      resources :patients, only: [:index, :create]
+      resources :patients, only: [:index, :create, :update]
       resources :clinical_services, only: [:index]
       resources :patient_entries, only: [:index, :create, :update]
     end
