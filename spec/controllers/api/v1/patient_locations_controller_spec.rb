@@ -12,7 +12,7 @@ RSpec.describe Api::V1::PatientLocationsController, type: :controller do
 
     context 'with an authenticated user' do
       let(:user) { create :user }
-      let!(:patient_locations) { create_list :patient_locations, 10 }
+      let!(:patient_locations) { create_list :patient_location, 10 }
       before do
         authenticate(user)
         get :index
