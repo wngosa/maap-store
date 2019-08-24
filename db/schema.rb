@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_24_174715) do
+ActiveRecord::Schema.define(version: 2019_08_24_185335) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -123,8 +123,6 @@ ActiveRecord::Schema.define(version: 2019_08_24_174715) do
     t.string "discharge_date"
     t.string "weight"
     t.string "height"
-    t.boolean "pregnancy_status"
-    t.boolean "premature_birth"
     t.string "chief_complaint"
     t.boolean "patient_transferred"
     t.string "primary_diagnosis"
@@ -144,6 +142,8 @@ ActiveRecord::Schema.define(version: 2019_08_24_174715) do
     t.string "patient_outcome_at_discharge"
     t.bigint "stay_timespan"
     t.bigint "patient_location_id"
+    t.string "pregnancy_status"
+    t.string "premature_birth"
     t.index ["patient_id"], name: "index_patient_entries_on_patient_id"
     t.index ["patient_location_id"], name: "index_patient_entries_on_patient_location_id"
   end
