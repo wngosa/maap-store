@@ -36,12 +36,11 @@ module Api
               .permit(:patient_id, :department, :stay_timespan,
                       :weight, :height, :pregnancy_status, :premature_birth, :chief_complaint,
                       :patient_transferred, :primary_diagnosis, :primary_diagnosis_icd_code,
-                      :acute_myocardial_infarction, :chf, :not_mentioned, :other,
                       :antibiotics_prescribed, :antibiotic, :antibiotic_consumption,
                       :patient_was_on_an_indwelling_medical_device,
                       :medical_device, :infection_acquisition, :discharge_diagnostic,
                       :discharge_diagnostic_icd_code, :patient_outcome_at_discharge,
-                      :patient_location_id)
+                      :patient_location_id, :comorbidities)
       end
     end
   end

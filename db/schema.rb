@@ -10,24 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_24_185335) do
+ActiveRecord::Schema.define(version: 2019_08_26_213817) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-
-  create_table "active_admin_comments", force: :cascade do |t|
-    t.string "namespace"
-    t.text "body"
-    t.string "resource_type"
-    t.bigint "resource_id"
-    t.string "author_type"
-    t.bigint "author_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["author_type", "author_id"], name: "index_active_admin_comments_on_author_type_and_author_id"
-    t.index ["namespace"], name: "index_active_admin_comments_on_namespace"
-    t.index ["resource_type", "resource_id"], name: "index_active_admin_comments_on_resource_type_and_resource_id"
-  end
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -100,16 +86,6 @@ ActiveRecord::Schema.define(version: 2019_08_24_185335) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "lab_record", force: :cascade do |t|
-    t.jsonb "content"
-    t.bigint "lab_record_import_id"
-    t.string "patient_id_state"
-    t.integer "row"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["lab_record_import_id"], name: "index_lab_record_on_lab_record_import_id"
-  end
-
   create_table "lab_record_imports", force: :cascade do |t|
     t.integer "header_row"
     t.integer "data_rows_from"
@@ -150,10 +126,6 @@ ActiveRecord::Schema.define(version: 2019_08_24_185335) do
     t.boolean "patient_transferred"
     t.string "primary_diagnosis"
     t.string "primary_diagnosis_icd_code"
-    t.boolean "acute_myocardial_infarction"
-    t.boolean "chf"
-    t.boolean "not_mentioned"
-    t.boolean "other"
     t.boolean "antibiotics_prescribed"
     t.string "antibiotic"
     t.string "antibiotic_consumption"
@@ -167,6 +139,7 @@ ActiveRecord::Schema.define(version: 2019_08_24_185335) do
     t.bigint "patient_location_id"
     t.string "pregnancy_status"
     t.string "premature_birth"
+    t.string "comorbidities"
     t.index ["patient_id"], name: "index_patient_entries_on_patient_id"
     t.index ["patient_location_id"], name: "index_patient_entries_on_patient_location_id"
   end
@@ -243,12 +216,5 @@ ActiveRecord::Schema.define(version: 2019_08_24_185335) do
 
   add_foreign_key "antibiotic_consumption_stats", "antibiotics"
   add_foreign_key "antibiotic_consumption_stats", "sites"
-  add_foreign_key "lab_record", "lab_record_imports"
-  add_foreign_key "lab_record_imports", "sites"
-  add_foreign_key "lab_records", "lab_record_imports"
-  add_foreign_key "lab_records", "sites"
   add_foreign_key "patient_entries", "patient_locations"
-  add_foreign_key "patient_entries", "patients"
-  add_foreign_key "patient_id_hashes", "sites"
-  add_foreign_key "patients", "sites"
 end
