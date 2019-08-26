@@ -1,19 +1,19 @@
 ActiveAdmin.register Site do
-  permit_params :name, :address, :location, :site_type, :census, :available_beds, 
-                :outpatient_by_month, :services_served_by_lab, :has_patient_uid, :system_change, 
-                :has_infection_disease_department, :infectious_diseases_physicians, 
-                :infectious_diseases_nurses, :has_amr_comitee, :meet_frequency, 
-                :has_annual_antibiogram, :stew_team, :has_guideline_antibiotics, 
-                :has_av_spec_processed, :av_spec_processed, :av_spec_bacterial_grow, 
+  permit_params :name, :address, :location, :site_type, :census, :available_beds,
+                :outpatient_by_month, :services_served_by_lab, :has_patient_uid, :system_change,
+                :has_infection_disease_department, :infectious_diseases_physicians,
+                :infectious_diseases_nurses, :has_amr_comitee, :meet_frequency,
+                :has_annual_antibiogram, :stew_team, :has_guideline_antibiotics,
+                :has_av_spec_processed, :av_spec_processed, :av_spec_bacterial_grow,
                 :has_farmacy, :has_hospital, :has_laboratory
 
-  form do |f|
+  form do |_f|
     inputs 'Details' do
       input :name
       input :address
       input :location
-      input :site_type, label: 'Type of clinical/health site', 
-                        collection: ['Public hospital', 'Private hospital', 'Mission hospital', 'Military hospital', 
+      input :site_type, label: 'Type of clinical/health site',
+                        collection: ['Public hospital', 'Private hospital', 'Mission hospital', 'Military hospital',
                                      'Tertiary hospital', 'Secondary hospital', 'Primary hospital', 'Other'], as: :select, input_html: { data: { not: 'Other', action: 'hide', target: '.site_type' } }
       input :site_type, label: 'Please enter the new site type you want to add', wrapper_html: { class: 'site_type' }
       input :census, label: 'What is the annual patient census at the clinical setting for 2018?'
@@ -26,7 +26,7 @@ ActiveAdmin.register Site do
                                      input_html: { multiple: true }
       input :has_patient_uid, label: 'Does the clinical setting assign unique identifier (identification number) to track patients?', input_html: { data: { if: 'not_checked', action: 'hide', target: '.system_change' } }
       input :system_change, label: 'Has there been any change to this system since 2018?', wrapper_html: { class: 'system_change' }
-      
+
       input :has_infection_disease_department, label: 'Does an infection disease department exist at the clinical setting?', input_html: { data: { if: 'not_checked', action: 'hide', target: '.has_infection_disease_department' } }
       input :infectious_diseases_physicians, label: 'How many infectious disease (ID) physicians are there in the department', wrapper_html: { class: 'has_infection_disease_department' }
       input :infectious_diseases_nurses, label: 'How many infectious disease (ID) nurses are there in the department', wrapper_html: { class: 'has_infection_disease_department' }
@@ -47,7 +47,7 @@ ActiveAdmin.register Site do
 
       # destroy
       # input :level
-      # input :permanently_identified_patients 
+      # input :permanently_identified_patients
       # input :teaching
       # input :identified_patients
     end

@@ -19,6 +19,7 @@ AllCops:
     - bin/**/*
     - tmp/**/*
     - Guardfile
+    - app/admin/**/*
 
 
 Documentation:
