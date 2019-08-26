@@ -21,6 +21,7 @@ gem 'rubyXL'
 gem 'sidekiq'
 gem 'sidekiq-scheduler'
 gem 'spreadsheet'
+gem 'activeadmin_dynamic_fields'
 
 group :development, :test do
   gem 'pry-rails'
