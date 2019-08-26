@@ -40,7 +40,8 @@ module Api
                       :antibiotics_prescribed, :antibiotic, :antibiotic_consumption,
                       :patient_was_on_an_indwelling_medical_device,
                       :medical_device, :infection_acquisition, :discharge_diagnostic,
-                      :discharge_diagnostic_icd_code, :patient_outcome_at_discharge)
+                      :discharge_diagnostic_icd_code, :patient_outcome_at_discharge,
+                      :patient_location_id)
       end
     end
   end
