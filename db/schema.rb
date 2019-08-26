@@ -15,6 +15,20 @@ ActiveRecord::Schema.define(version: 2019_08_24_185335) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "active_admin_comments", force: :cascade do |t|
+    t.string "namespace"
+    t.text "body"
+    t.string "resource_type"
+    t.bigint "resource_id"
+    t.string "author_type"
+    t.bigint "author_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["author_type", "author_id"], name: "index_active_admin_comments_on_author_type_and_author_id"
+    t.index ["namespace"], name: "index_active_admin_comments_on_namespace"
+    t.index ["resource_type", "resource_id"], name: "index_active_admin_comments_on_resource_type_and_resource_id"
+  end
+
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -72,7 +86,6 @@ ActiveRecord::Schema.define(version: 2019_08_24_185335) do
     t.string "brand"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "who_atc_index"
   end
 
   create_table "clinical_services", force: :cascade do |t|
@@ -85,6 +98,16 @@ ActiveRecord::Schema.define(version: 2019_08_24_185335) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "lab_record", force: :cascade do |t|
+    t.jsonb "content"
+    t.bigint "lab_record_import_id"
+    t.string "patient_id_state"
+    t.integer "row"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["lab_record_import_id"], name: "index_lab_record_on_lab_record_import_id"
   end
 
   create_table "lab_record_imports", force: :cascade do |t|
@@ -220,5 +243,12 @@ ActiveRecord::Schema.define(version: 2019_08_24_185335) do
 
   add_foreign_key "antibiotic_consumption_stats", "antibiotics"
   add_foreign_key "antibiotic_consumption_stats", "sites"
+  add_foreign_key "lab_record", "lab_record_imports"
+  add_foreign_key "lab_record_imports", "sites"
+  add_foreign_key "lab_records", "lab_record_imports"
+  add_foreign_key "lab_records", "sites"
   add_foreign_key "patient_entries", "patient_locations"
+  add_foreign_key "patient_entries", "patients"
+  add_foreign_key "patient_id_hashes", "sites"
+  add_foreign_key "patients", "sites"
 end

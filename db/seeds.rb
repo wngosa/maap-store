@@ -3,9 +3,10 @@ user = User.find_or_create_by(email: 'example@maap.tld') do |u|
 end
 AdminUser.create(email: 'admin@maap.tld', password: 'password', password_confirmation: 'password')
 
-FactoryBot::create_list(:site, [0, 10 - Site.count].max)
-FactoryBot::create_list(:antibiotic, [0, 10 - Antibiotic.count].max)
-FactoryBot::create_list(:antibiotic_consumption_stat, [0, 10 - AntibioticConsumptionStat.count].max)
+if Rails.env.development?
+  FactoryBot::create_list(:site, [0, 10 - Site.count].max)
+  FactoryBot::create_list(:antibiotic_consumption_stat, [0, 10 - AntibioticConsumptionStat.count].max)
+end
 
 # Patch for devise token auth model.
 # It's only needed if you are in the context of the initial migration for uses
@@ -36,8 +37,11 @@ CSV.foreach(
   headers: true
 ) do |row|
   Antibiotic.find_or_create_by(
-    name: row['name'],
-    who_atc_index: row['who_atc_index']
+    name: row['name'].split.map(&:capitalize).join(' '),
+    strength_value: row['strength_value'],
+    strength_unit: row['strength_unit'],
+    form: row['form'].split.map(&:capitalize).join(' '),
+    brand: row['brand'].split.map(&:capitalize).join(' ')
   )
 end
 
