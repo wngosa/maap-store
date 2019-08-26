@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_23_184721) do
+ActiveRecord::Schema.define(version: 2019_08_24_185335) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -141,14 +141,11 @@ ActiveRecord::Schema.define(version: 2019_08_23_184721) do
     t.bigint "patient_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "location"
     t.string "department"
     t.string "admission_date"
     t.string "discharge_date"
     t.string "weight"
     t.string "height"
-    t.boolean "pregnancy_status"
-    t.boolean "premature_birth"
     t.string "chief_complaint"
     t.boolean "patient_transferred"
     t.string "primary_diagnosis"
@@ -167,7 +164,11 @@ ActiveRecord::Schema.define(version: 2019_08_23_184721) do
     t.string "discharge_diagnostic_icd_code"
     t.string "patient_outcome_at_discharge"
     t.bigint "stay_timespan"
+    t.bigint "patient_location_id"
+    t.string "pregnancy_status"
+    t.string "premature_birth"
     t.index ["patient_id"], name: "index_patient_entries_on_patient_id"
+    t.index ["patient_location_id"], name: "index_patient_entries_on_patient_location_id"
   end
 
   create_table "patient_id_hashes", force: :cascade do |t|
@@ -178,6 +179,12 @@ ActiveRecord::Schema.define(version: 2019_08_23_184721) do
     t.bigint "site_id"
     t.index ["patient_id"], name: "index_patient_id_hashes_on_patient_id"
     t.index ["site_id"], name: "index_patient_id_hashes_on_site_id"
+  end
+
+  create_table "patient_locations", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "patients", force: :cascade do |t|
@@ -240,6 +247,7 @@ ActiveRecord::Schema.define(version: 2019_08_23_184721) do
   add_foreign_key "lab_record_imports", "sites"
   add_foreign_key "lab_records", "lab_record_imports"
   add_foreign_key "lab_records", "sites"
+  add_foreign_key "patient_entries", "patient_locations"
   add_foreign_key "patient_entries", "patients"
   add_foreign_key "patient_id_hashes", "sites"
   add_foreign_key "patients", "sites"
