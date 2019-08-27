@@ -126,10 +126,6 @@ ActiveRecord::Schema.define(version: 2019_08_27_133113) do
     t.boolean "patient_transferred"
     t.string "primary_diagnosis"
     t.string "primary_diagnosis_icd_code"
-    t.boolean "acute_myocardial_infarction"
-    t.boolean "chf"
-    t.boolean "not_mentioned"
-    t.boolean "other"
     t.boolean "antibiotics_prescribed"
     t.string "antibiotic"
     t.string "antibiotic_consumption"
@@ -143,6 +139,7 @@ ActiveRecord::Schema.define(version: 2019_08_27_133113) do
     t.bigint "patient_location_id"
     t.string "pregnancy_status"
     t.string "premature_birth"
+    t.string "comorbidities"
     t.index ["patient_id"], name: "index_patient_entries_on_patient_id"
     t.index ["patient_location_id"], name: "index_patient_entries_on_patient_location_id"
   end
