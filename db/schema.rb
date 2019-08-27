@@ -183,6 +183,7 @@ ActiveRecord::Schema.define(version: 2019_08_27_133113) do
     t.boolean "has_pharmacy"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "level"
     t.boolean "has_hospital"
     t.boolean "has_laboratory"
     t.string "census"
