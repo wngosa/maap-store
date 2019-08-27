@@ -11,7 +11,6 @@
 # It's strongly recommended that you check this file into your version control system.
 
 ActiveRecord::Schema.define(version: 2019_08_26_213817) do
-
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -186,6 +185,26 @@ ActiveRecord::Schema.define(version: 2019_08_26_213817) do
     t.string "teaching"
     t.boolean "has_hospital"
     t.boolean "has_laboratory"
+    t.string "census"
+    t.string "site_type"
+    t.integer "available_beds"
+    t.integer "outpatient_by_month"
+    t.integer "admitted_by_month"
+    t.string "services_served_by_lab", array: true
+    t.boolean "has_patient_uid"
+    t.string "system_change"
+    t.boolean "has_infection_disease_department"
+    t.integer "infectious_diseases_physicians"
+    t.integer "infectious_diseases_nurses"
+    t.boolean "has_amr_comitee"
+    t.string "meet_frequency"
+    t.boolean "has_annual_antibiogram"
+    t.string "stew_team"
+    t.boolean "has_guideline_antibiotics"
+    t.boolean "has_av_spec_processed"
+    t.integer "av_spec_processed"
+    t.integer "av_spec_bacterial_grow"
+    t.datetime "last_visit"
   end
 
   create_table "specimen_sources", force: :cascade do |t|
@@ -216,5 +235,8 @@ ActiveRecord::Schema.define(version: 2019_08_26_213817) do
 
   add_foreign_key "antibiotic_consumption_stats", "antibiotics"
   add_foreign_key "antibiotic_consumption_stats", "sites"
+  add_foreign_key "lab_record_imports", "sites"
+  add_foreign_key "lab_records", "lab_record_imports"
+  add_foreign_key "lab_records", "sites"
   add_foreign_key "patient_entries", "patient_locations"
 end
