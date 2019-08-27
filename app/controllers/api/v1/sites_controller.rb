@@ -18,7 +18,7 @@ module Api
 
       def permitted_params
         params.require(:site).permit(
-          :name, :address, :location, :ownership, :has_farmacy,
+          :name, :address, :location, :ownership, :has_pharmacy,
           :identified_patients, :permanently_identified_patients,
           :level, :teaching, :has_hospital, :has_laboratory
         )

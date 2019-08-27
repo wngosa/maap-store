@@ -5,7 +5,7 @@ ActiveAdmin.register Site do
                 :infectious_diseases_nurses, :has_amr_comitee, :meet_frequency,
                 :has_annual_antibiogram, :stew_team, :has_guideline_antibiotics,
                 :has_av_spec_processed, :av_spec_processed, :av_spec_bacterial_grow,
-                :has_farmacy, :has_hospital, :has_laboratory, services_served_by_lab: []
+                :has_pharmacy, :has_hospital, :has_laboratory, services_served_by_lab: []
 
   form do |f|
     site_types = ['Public hospital', 'Private hospital', 'Mission hospital', 'Military hospital',
@@ -49,15 +49,9 @@ ActiveAdmin.register Site do
       input :av_spec_processed, label: 'Average number of specimens processed for bacterial culture in 2018', wrapper_html: { class: 'has_av_spec_processed' }
       input :av_spec_bacterial_grow, label: 'Average number of specimens that yielded bacterial growth and were processed for susceptibility tests, in 2018', wrapper_html: { class: 'has_av_spec_processed' }
 
-      input :has_farmacy
+      input :has_pharmacy
       input :has_hospital
       input :has_laboratory
-
-      # destroy
-      # input :level
-      # input :permanently_identified_patients
-      # input :teaching
-      # input :identified_patients
     end
     actions
   end

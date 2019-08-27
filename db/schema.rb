@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_27_131022) do
+ActiveRecord::Schema.define(version: 2019_08_27_133113) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -180,7 +180,7 @@ ActiveRecord::Schema.define(version: 2019_08_27_131022) do
     t.string "address"
     t.string "location"
     t.string "ownership"
-    t.boolean "has_farmacy"
+    t.boolean "has_pharmacy"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "has_hospital"
