@@ -10,8 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_27_133113) do
-
+ActiveRecord::Schema.define(version: 2019_08_28_145348) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -127,8 +126,6 @@ ActiveRecord::Schema.define(version: 2019_08_27_133113) do
     t.string "primary_diagnosis"
     t.string "primary_diagnosis_icd_code"
     t.boolean "antibiotics_prescribed"
-    t.string "antibiotic"
-    t.string "antibiotic_consumption"
     t.boolean "patient_was_on_an_indwelling_medical_device"
     t.string "medical_device"
     t.string "infection_acquisition"
@@ -140,6 +137,8 @@ ActiveRecord::Schema.define(version: 2019_08_27_133113) do
     t.string "pregnancy_status"
     t.string "premature_birth"
     t.string "comorbidities"
+    t.string "antibiotic_when"
+    t.string "prescribed_antibiotics_list"
     t.index ["patient_id"], name: "index_patient_entries_on_patient_id"
     t.index ["patient_location_id"], name: "index_patient_entries_on_patient_location_id"
   end
@@ -233,9 +232,6 @@ ActiveRecord::Schema.define(version: 2019_08_27_133113) do
 
   add_foreign_key "antibiotic_consumption_stats", "antibiotics"
   add_foreign_key "antibiotic_consumption_stats", "sites"
-  add_foreign_key "lab_record_imports", "sites"
-  add_foreign_key "lab_records", "lab_record_imports"
-  add_foreign_key "lab_records", "sites"
   add_foreign_key "patient_entries", "patient_locations"
   add_foreign_key "patient_entries", "patients"
   add_foreign_key "patient_id_hashes", "sites"
