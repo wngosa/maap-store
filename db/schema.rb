@@ -11,7 +11,6 @@
 # It's strongly recommended that you check this file into your version control system.
 
 ActiveRecord::Schema.define(version: 2019_08_28_145348) do
-
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -177,13 +176,10 @@ ActiveRecord::Schema.define(version: 2019_08_28_145348) do
     t.string "address"
     t.string "location"
     t.string "ownership"
-    t.boolean "has_farmacy"
-    t.boolean "identified_patients"
-    t.boolean "permanently_identified_patients"
+    t.boolean "has_pharmacy"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "level"
-    t.string "teaching"
     t.boolean "has_hospital"
     t.boolean "has_laboratory"
     t.string "census"
@@ -237,4 +233,7 @@ ActiveRecord::Schema.define(version: 2019_08_28_145348) do
   add_foreign_key "antibiotic_consumption_stats", "antibiotics"
   add_foreign_key "antibiotic_consumption_stats", "sites"
   add_foreign_key "patient_entries", "patient_locations"
+  add_foreign_key "patient_entries", "patients"
+  add_foreign_key "patient_id_hashes", "sites"
+  add_foreign_key "patients", "sites"
 end

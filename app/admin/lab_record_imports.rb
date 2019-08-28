@@ -19,5 +19,8 @@ ActiveAdmin.register LabRecordImport do
               rails_blob_path(lab_record.sheet_file, disposition: 'attachment'),
               download: true
     end
+    column :header_row
+    column :data_rows_from
+    column :data_rows_to
   end
 end
