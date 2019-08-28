@@ -13,6 +13,7 @@ ActiveAdmin.register LabRecord do
   # end
 
   index do
+    selectable_column
     column :id
     column :site
     column :lab_record_import
