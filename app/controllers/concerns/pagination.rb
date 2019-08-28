@@ -6,7 +6,8 @@ module Pagination
       total_pages: paginated_collection.total_pages,
       current_page: page,
       per_page: per_page,
-      total_count: paginated_collection.total_count
+      total_count: paginated_collection.total_count,
+      greather_updated_at: collection.maximum('updated_at')
     }
   end
 
