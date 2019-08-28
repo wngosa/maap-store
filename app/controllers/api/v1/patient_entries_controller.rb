@@ -36,7 +36,7 @@ module Api
               .permit(:patient_id, :department, :stay_timespan,
                       :weight, :height, :pregnancy_status, :premature_birth, :chief_complaint,
                       :patient_transferred, :primary_diagnosis, :primary_diagnosis_icd_code,
-                      :antibiotics_prescribed, :antibiotic, :antibiotic_consumption,
+                      :antibiotics_prescribed, :prescribed_antibiotics_list, :antibiotic_when,
                       :patient_was_on_an_indwelling_medical_device,
                       :medical_device, :infection_acquisition, :discharge_diagnostic,
                       :discharge_diagnostic_icd_code, :patient_outcome_at_discharge,
