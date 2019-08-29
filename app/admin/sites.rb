@@ -30,16 +30,16 @@ ActiveAdmin.register Site do
                                      collection: ['Medical', 'Surgical', 'Pediatric', 'Maternity and Gynacecological', 'Not mentioned', 'Intensive care', 'Emergency', 'Other'],
                                      as: :select,
                                      input_html: { multiple: true }
-      input :has_patient_uid, label: 'Does the clinical setting assign unique identifier (identification number) to track patients?/The clinical setting assigns unique identifier (identification number) to track patients?', 
+      input :has_patient_uid, label: 'The clinical setting assigns unique identifier (identification number) to track patients?', 
                               input_html: { data: { if: 'not_checked', action: 'hide', target: '.system_change' } }
       input :system_change, label: 'Has there been any change to this system since 2018?', wrapper_html: { class: 'system_change' }
 
-      input :has_infection_disease_department, label: 'Does an infectious disease department exist at the clinical setting?/ The clinical setting has an infectious disease department', 
+      input :has_infection_disease_department, label: 'The clinical setting has an infectious disease department', 
                                                input_html: { data: { if: 'not_checked', action: 'hide', target: '.has_infection_disease_department' } }
       input :infectious_diseases_physicians, label: 'How many infectious disease (ID) physicians are there in the department', wrapper_html: { class: 'has_infection_disease_department' }
       input :infectious_diseases_nurses, label: 'How many infectious disease (ID) nurses are there in the department', wrapper_html: { class: 'has_infection_disease_department' }
 
-      input :has_amr_comitee, label: 'Does an infectious disease department exist at the clinical setting?/ The clinical setting has an infectious disease department', 
+      input :has_amr_comitee, label: 'The clinical setting has an antimicrobial stewardship programme', 
                               input_html: { data: { if: 'not_checked', action: 'hide', target: '.has_amr_comitee' } }
       input :meet_frequency, label: 'What are the frequency of the meetings', wrapper_html: { class: 'has_amr_comitee' }
       input :has_annual_antibiogram, label: 'Is an annual antibiogram generated/Annual antibiogram is generated', 
@@ -47,7 +47,7 @@ ActiveAdmin.register Site do
       input :stew_team, label: 'What is the composition of the stewardship team', wrapper_html: { class: 'has_amr_comitee' }
       input :has_guideline_antibiotics, label: 'Are any guidelines referred for antibiotic prescribing/ Has guidelines referred for antibiotic prescribing', wrapper_html: { class: 'has_amr_comitee' }
 
-      input :has_av_spec_processed, label: 'Does the laboratory have information on average number of specimens processed for culture and sensitivity in 2018? / The laboratory has information on average number of specimens processed for culture sensitivity in 2018', input_html: { data: { if: 'not_checked', action: 'hide', target: '.has_av_spec_processed' } }
+      input :has_av_spec_processed, label: 'The laboratory has information on average number of specimens processed for culture sensitivity in 2018', input_html: { data: { if: 'not_checked', action: 'hide', target: '.has_av_spec_processed' } }
       input :av_spec_processed, label: 'Average number of specimens processed for bacterial culture in 2018', wrapper_html: { class: 'has_av_spec_processed' }
       input :av_spec_bacterial_grow, label: 'Average number of specimens that yielded bacterial growth and were processed for susceptibility tests, in 2018', wrapper_html: { class: 'has_av_spec_processed' }
 
