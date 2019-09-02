@@ -1,14 +1,16 @@
 ActiveAdmin.register Antibiotic do
-  # See permitted parameters documentation:
-  # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
-  #
-  # permit_params :list, :of, :attributes, :on, :model
-  #
-  # or
-  #
-  # permit_params do
-  #   permitted = [:permitted, :attributes]
-  #   permitted << :other if params[:action] == 'create' && current_user.admin?
-  #   permitted
-  # end
+  actions :index, :show, :new, :create, :edit, :update
+  permit_params :name, :strength_value, :strength_unit, :form, :pack_size, 
+                :brand
+  form do |f|
+    inputs 'Details' do
+      input :name
+      input :strength_value
+      input :strength_unit
+      input :form
+      input :pack_size
+      input :brand
+    end
+    actions
+  end
 end
