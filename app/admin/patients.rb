@@ -1,14 +1,14 @@
 ActiveAdmin.register Patient do
-  # See permitted parameters documentation:
-  # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
-  #
-  # permit_params :list, :of, :attributes, :on, :model
-  #
-  # or
-  #
-  # permit_params do
-  #   permitted = [:permitted, :attributes]
-  #   permitted << :other if params[:action] == 'create' && current_user.admin?
-  #   permitted
-  # end
+  actions :index, :edit, :update
+  permit_params :gender, :year_of_birth, :level_of_education
+  
+  form do |f|
+    inputs 'Details' do
+      input :patient_id, input_html: { disabled: true }
+      input :gender, as: :select, collection: ['not specified', 'female', 'male', 'other']
+      input :year_of_birth
+      input :level_of_education
+    end
+    actions
+  end
 end
