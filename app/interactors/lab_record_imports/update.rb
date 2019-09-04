@@ -4,7 +4,8 @@ module LabRecordImports
 
     def call
       ActiveRecord::Base.transaction do
-        lab_record_import.update!(rows: params[:rows])
+        lab_record_import.update!(rows: params[:rows], 
+                                  patient_id_state: :pending)
         params.fetch(:rows, []).each_with_index do |row, index|
           lab_record_for_row(index).update(
             patient_id: row[patient_id_index]['w'],
