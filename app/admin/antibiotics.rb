@@ -3,7 +3,7 @@ ActiveAdmin.register Antibiotic do
   remove_filter :antibiotic_consumption_stats
 
   actions :index, :show, :new, :create, :edit, :update
-  permit_params :name, :strength_value, :strength_unit, :form, :pack_size, 
+  permit_params :name, :strength_value, :strength_unit, :form, :pack_size,
                 :brand
 
   form do |f|
@@ -16,5 +16,17 @@ ActiveAdmin.register Antibiotic do
       input :brand
     end
     actions
+  end
+
+  csv do
+    column :id
+    column :name
+    column :strength_value
+    column :strength_unit
+    column :form
+    column :pack_size
+    column :brand
+    column :created_at
+    column :updated_at
   end
 end

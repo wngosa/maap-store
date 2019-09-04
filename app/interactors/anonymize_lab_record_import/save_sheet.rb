@@ -4,11 +4,11 @@ module AnonymizeLabRecordImport
 
     def call # rubocop:disable Metrics/AbcSize
       context.sheet_file.write("#{context.sheet_path}.xlsx")
-      context.lab_record.sheet_file.attach(
+      context.lab_record_import.sheet_file.attach(
         io: File.open("#{context.sheet_path}.xlsx"),
-        filename: "Download.#{file_extension}"
+        filename: "#{context.lab_record_import.site_id || "unknown-site"}-#{context.lab_record_import.id}.#{file_extension}"
       )
-      context.lab_record.save!
+      context.lab_record_import.save!
     end
 
     private

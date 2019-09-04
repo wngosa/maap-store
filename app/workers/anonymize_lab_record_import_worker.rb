@@ -3,18 +3,18 @@ class AnonymizeLabRecordImportWorker
 
   sidekiq_options retry: false
 
-  def perform(lab_record_id, patient_ids = false)
-    @lab_record_id = lab_record_id
-    logger.info "Starting anonymization of #{lab_record.id}"
+  def perform(lab_record_import_id, patient_ids = false)
+    @lab_record_import_id = lab_record_import_id
+    logger.info "Starting anonymization of #{lab_record_import.id}"
 
-    AnonymizeLabRecordImport::Organizer.call(lab_record: lab_record, patient_ids: patient_ids)
+    AnonymizeLabRecordImport::Organizer.call(lab_record_import: lab_record_import, patient_ids: patient_ids)
 
-    logger.info "Finished anonymization of #{lab_record.id}"
+    logger.info "Finished anonymization of #{lab_record_import.id}"
   end
 
   private
 
-  def lab_record
-    @lab_record ||= LabRecordImport.find(@lab_record_id)
+  def lab_record_import
+    @lab_record_import ||= LabRecordImport.find(@lab_record_import_id)
   end
 end

@@ -5,6 +5,7 @@ module AnonymizeLabRecordImport
     organize AnonymizeLabRecordImport::ReadSheet,
              AnonymizeLabRecordImport::ObfuscatePatientIds,
              AnonymizeLabRecordImport::RemoveFields,
-             AnonymizeLabRecordImport::SaveSheet
+             AnonymizeLabRecordImport::SaveSheet,
+             AnonymizeLabRecordImport::PruneTableFields
   end
 end
