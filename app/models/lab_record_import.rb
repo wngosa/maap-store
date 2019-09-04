@@ -9,6 +9,10 @@ class LabRecordImport < ApplicationRecord
     id
   end
 
+  def obfuscated?
+    patient_id_state == 'obfuscated'
+  end
+
   def rows
     JSON[self[:rows]]
   end

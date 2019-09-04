@@ -29,6 +29,7 @@ module Api
 
       def build_lab_record_import
         lab_record_import = LabRecordImport.new(permitted_params)
+        lab_record_import.patient_id_state = :pending
         lab_record_import.lab_records.each do |lab_record|
           lab_record.site = lab_record_import.site
           next unless lab_record_import.patient_id_index
