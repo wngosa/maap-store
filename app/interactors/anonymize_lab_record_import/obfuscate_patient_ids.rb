@@ -8,7 +8,9 @@ module AnonymizeLabRecordImport
       return unless context.patient_ids
 
       header_cell =
-        read_cell(context.lab_record_import.header_row - 1, context.lab_record_import.patient_id_index).to_s
+        read_cell(
+          context.lab_record_import.header_row - 1, context.lab_record_import.patient_id_index
+        ).to_s
       if header_cell.empty?
         update_cell(
           context.lab_record_import.header_row - 1,
