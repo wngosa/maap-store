@@ -22,7 +22,6 @@ gem 'rubyXL'
 gem 'sidekiq'
 gem 'sidekiq-scheduler'
 gem 'spreadsheet'
-gem 'mime-types'
 
 group :development, :test do
   gem 'pry-rails'

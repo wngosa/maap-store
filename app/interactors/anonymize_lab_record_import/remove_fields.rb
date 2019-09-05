@@ -43,7 +43,7 @@ module AnonymizeLabRecordImport
     end
 
     def read_cell(row, col)
-      return read_xlsx(row, col) if context.sheet_type == :xlsx 
+      return read_xlsx(row, col) if context.sheet_type == :xlsx
       return read_xls(row, col) if context.sheet_type == :xls
 
       read_csv(row, col)

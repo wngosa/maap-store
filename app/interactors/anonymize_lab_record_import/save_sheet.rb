@@ -17,12 +17,23 @@ module AnonymizeLabRecordImport
     private
 
     def save_file!
-      if context.sheet_type == :csv
-        CSV.open(context.sheet_path, 'wb') { |csv| context.sheet_file.each { |row| csv << row } }
-      else
-        context.sheet_path = "#{context.sheet_path}.xlsx"
-        context.sheet_file.write(context.sheet_path)
-      end
+      return save_xls if context.sheet_type == :xls
+      return save_xlsx if context.sheet_type == :xlsx
+
+      save_csv
+    end
+
+    def save_csv
+      CSV.open(context.sheet_path, 'wb') { |csv| context.sheet_file.each { |row| csv << row } }
+    end
+
+    def save_xls
+      save_xlsx
+    end
+
+    def save_xlsx
+      context.sheet_path = "#{context.sheet_path}.xlsx"
+      context.sheet_file.write(context.sheet_path)
     end
 
     def file_extension
