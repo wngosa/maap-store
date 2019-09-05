@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_04_164454) do
+ActiveRecord::Schema.define(version: 2019_09_04_202629) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -176,7 +176,6 @@ ActiveRecord::Schema.define(version: 2019_09_04_164454) do
   create_table "sites", force: :cascade do |t|
     t.string "name"
     t.string "address"
-    t.string "location"
     t.string "ownership"
     t.boolean "has_pharmacy"
     t.datetime "created_at", null: false
@@ -184,11 +183,9 @@ ActiveRecord::Schema.define(version: 2019_09_04_164454) do
     t.string "level"
     t.boolean "has_hospital"
     t.boolean "has_laboratory"
-    t.string "census"
     t.string "site_type"
     t.integer "available_beds"
     t.integer "outpatient_by_month"
-    t.integer "admitted_by_month"
     t.string "services_served_by_lab", array: true
     t.boolean "has_patient_uid"
     t.string "system_change"
@@ -204,6 +201,38 @@ ActiveRecord::Schema.define(version: 2019_09_04_164454) do
     t.integer "av_spec_processed"
     t.integer "av_spec_bacterial_grow"
     t.datetime "last_visit"
+    t.string "registration_number"
+    t.string "registration_body"
+    t.boolean "has_cms"
+    t.string "location_type"
+    t.string "contact_name"
+    t.string "contact_designation"
+    t.string "contact_email"
+    t.string "contact_number"
+    t.string "record_keeping_system"
+    t.string "other_services"
+    t.boolean "is_specialty_hospital"
+    t.string "specialties", array: true
+    t.string "other_specialties"
+    t.string "served_population_size"
+    t.integer "average_patients_per_year"
+    t.string "average_icu_length_of_stay"
+    t.boolean "patient_uid_in_lab_records"
+    t.string "system_change_details"
+    t.integer "av_spec_fungal_processed"
+    t.integer "av_spec_fungal_grow"
+    t.boolean "frequented_community_pharmacies"
+    t.string "community_pharmacies_details"
+    t.string "pharmacy_contact_name"
+    t.string "pharmacy_contact_designation"
+    t.string "pharmacy_contact_email"
+    t.string "pharmacy_contact_number"
+    t.string "pharmacy_records_keeping"
+    t.string "pharmacy_data_extraction_records", array: true
+    t.string "cms_dispatch_destinations"
+    t.string "cms_dispatch_frequency"
+    t.boolean "cms_collect_stock"
+    t.string "cms_facility_collector_details"
   end
 
   create_table "specimen_sources", force: :cascade do |t|
