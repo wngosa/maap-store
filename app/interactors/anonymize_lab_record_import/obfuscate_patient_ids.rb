@@ -36,21 +36,43 @@ module AnonymizeLabRecordImport
     end
 
     def read_cell(row, col)
-      if context.sheet_type == :xlsx
-        context.current_sheet[row][col].value
-      else
-        context.current_sheet[row, col]
-      end
+      return read_xlsx(row, col) if context.sheet_type == :xlsx 
+      return read_xls(row, col) if context.sheet_type == :xls
+
+      read_csv(row, col)
+    end
+
+    def read_csv(row, col)
+      context.sheet_file[row][col]
+    end
+
+    def read_xls(row, col)
+      context.current_sheet[row, col]
+    end
+
+    def read_xlsx(row, col)
+      context.current_sheet[row][col].value
     end
 
     def update_cell(row, col, content)
-      if context.sheet_type == :xlsx
-        context.current_sheet[row][col].change_contents(
-          content
-        )
-      else
-        context.current_sheet[row, col] = content
-      end
+      return update_cell_xlsx(row, col, content) if context.sheet_type == :xlsx
+      return update_cell_xls(row, col, content) if context.sheet_type == :xls
+
+      update_cell_csv(row, col, content)
+    end
+
+    def update_cell_csv(row, col, content)
+      context.sheet_file[row][col] = content
+    end
+
+    def update_cell_xls(row, col, content)
+      context.current_sheet[row, col] = content
+    end
+
+    def update_cell_xlsx(row, col, content)
+      context.current_sheet[row][col].change_contents(
+        content
+      )
     end
 
     def first_row
