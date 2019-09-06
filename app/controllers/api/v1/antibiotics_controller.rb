@@ -16,7 +16,23 @@ module Api
         end
       end
 
+      def update
+        antibiotic = Antibiotic.find(params[:id])
+        if antibiotic.update(update_permitted_params)
+          render json: antibiotic, status: :accepted
+        else
+          render json: {
+            errors: antibiotic.errors
+          }, status: :unprocessable_entity
+        end
+      end
+
       private
+
+      # TODO: Permit params when antibiotic edit is enabled
+      def update_permitted_params
+        params.require(:antibiotic).permit
+      end
 
       def permitted_params
         params.require(:antibiotic).permit(
