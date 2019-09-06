@@ -2,6 +2,7 @@ user = User.find_or_create_by(email: 'example@maap.tld') do |u|
   u.password = 'password'
 end
 AdminUser.create(email: 'admin@maap.tld', password: 'password', password_confirmation: 'password')
+AdminUser.create(email: 'viewer@maap.tld', password: 'password', password_confirmation: 'password', role: :viewer)
 
 if Rails.env.development?
   FactoryBot::create_list(:site, [0, 10 - Site.count].max)
