@@ -157,6 +157,8 @@ ActiveRecord::Schema.define(version: 2019_09_11_135136) do
     t.string "comorbidities"
     t.string "antibiotic_when"
     t.string "prescribed_antibiotics_list"
+    t.integer "age_value"
+    t.string "age_unit"
     t.index ["patient_id"], name: "index_patient_entries_on_patient_id"
     t.index ["patient_location_id"], name: "index_patient_entries_on_patient_location_id"
   end

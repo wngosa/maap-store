@@ -33,7 +33,7 @@ module Api
 
       def create_permitted_params
         params.require(:patient_entry)
-              .permit(:patient_id, :department, :stay_timespan,
+              .permit(:patient_id, :department, :stay_timespan, :age_unit, :age_value,
                       :weight, :height, :pregnancy_status, :premature_birth, :chief_complaint,
                       :patient_transferred, :primary_diagnosis, :primary_diagnosis_icd_code,
                       :antibiotics_prescribed, :prescribed_antibiotics_list, :antibiotic_when,
