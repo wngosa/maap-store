@@ -8,8 +8,9 @@ class AnonymizeLabRecordImportWorker
     logger.info "Starting anonymization of #{lab_record_import.id}"
 
     AnonymizeLabRecordImport::Organizer.call(
-      lab_record_import: lab_record_import,
-      patient_ids: patient_ids
+      record: lab_record_import,
+      patient_ids: patient_ids,
+      state_attribute: :patient_id_state
     )
 
     logger.info "Finished anonymization of #{lab_record_import.id}"

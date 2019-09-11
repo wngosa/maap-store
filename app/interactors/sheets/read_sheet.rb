@@ -1,4 +1,4 @@
-module AnonymizeLabRecordImport
+module Sheets
   class ReadSheet
     include Interactor
 
@@ -7,7 +7,7 @@ module AnonymizeLabRecordImport
         context.sheet_path =
           ActiveStorage::Blob.service.send(
             :path_for,
-            context.lab_record_import.sheet_file.key
+            context.record.sheet_file.key
           )
         context.sheet_type = :xlsx
         context.sheet_file =

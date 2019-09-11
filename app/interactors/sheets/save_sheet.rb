@@ -1,17 +1,17 @@
-module AnonymizeLabRecordImport
+module Sheets
   class SaveSheet
     include Interactor
 
     def call # rubocop:disable Metrics/AbcSize
-      file_id = (context.lab_record_import.site_id || 'unknown-site').to_s
-      filename = "#{file_id}-#{context.lab_record_import.id}"
+      file_id = (context.record.site_id || 'unknown-site').to_s
+      filename = "#{file_id}-#{context.record.id}"
 
       save_file!
-      context.lab_record_import.sheet_file.attach(
+      context.record.sheet_file.attach(
         io: File.open(context.sheet_path),
         filename: "#{filename}.#{file_extension}"
       )
-      context.lab_record_import.save!
+      context.record.save!
     end
 
     private

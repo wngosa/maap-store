@@ -1,9 +1,8 @@
-module AnonymizeLabRecordImport
+module AnonymizeElectronicPharmacyStockRecord
   class Organizer
     include Interactor::Organizer
 
     organize Sheets::ReadSheet,
-             AnonymizeLabRecordImport::ObfuscatePatientIds,
              Sheets::RemoveFields,
              Sheets::SaveSheet,
              Sheets::PruneTableFields

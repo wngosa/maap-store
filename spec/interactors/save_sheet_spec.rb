@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-RSpec.describe AnonymizeLabRecordImport::SaveSheet, type: :interactor do
+RSpec.describe Sheets::SaveSheet, type: :interactor do
   describe '.call' do
     pending "add some examples to (or delete) #{__FILE__}"
   end
