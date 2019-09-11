@@ -10,7 +10,8 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_05_194953) do
+ActiveRecord::Schema.define(version: 2019_09_11_135136) do
+
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -84,6 +85,21 @@ ActiveRecord::Schema.define(version: 2019_09_05_194953) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "electronic_pharmacy_stock_records", force: :cascade do |t|
+    t.integer "header_row"
+    t.integer "data_rows_from"
+    t.integer "data_rows_to"
+    t.jsonb "rows"
+    t.jsonb "columns"
+    t.jsonb "phi"
+    t.jsonb "date"
+    t.bigint "site_id"
+    t.integer "obfuscation_state"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["site_id"], name: "index_electronic_pharmacy_stock_records_on_site_id"
   end
 
   create_table "lab_record_imports", force: :cascade do |t|
@@ -263,6 +279,7 @@ ActiveRecord::Schema.define(version: 2019_09_05_194953) do
 
   add_foreign_key "antibiotic_consumption_stats", "antibiotics"
   add_foreign_key "antibiotic_consumption_stats", "sites"
+  add_foreign_key "electronic_pharmacy_stock_records", "sites"
   add_foreign_key "lab_record_imports", "sites"
   add_foreign_key "lab_records", "lab_record_imports"
   add_foreign_key "lab_records", "sites"

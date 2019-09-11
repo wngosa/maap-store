@@ -26,6 +26,7 @@ Rails.application.routes.draw do
       resources :clinical_services, only: [:index]
       resources :patient_entries, only: [:index, :create, :update]
       resources :patient_locations, only: [:index, :create, :update]
+      resources :electronic_pharmacy_stock_records, only: [:create]
     end
   end
 end
