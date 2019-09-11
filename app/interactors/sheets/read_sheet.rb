@@ -1,4 +1,4 @@
-module AnonymizeElectronicPharmacyStockRecord
+module Sheets
   class ReadSheet
     include Interactor
 
@@ -7,9 +7,8 @@ module AnonymizeElectronicPharmacyStockRecord
         context.sheet_path =
           ActiveStorage::Blob.service.send(
             :path_for,
-            context.electronic_pharmacy_stock_record.sheet_file.key
+            context.record.sheet_file.key
           )
-        Rails.logger.info context.sheet_path
         context.sheet_type = :xlsx
         context.sheet_file =
           RubyXL::Parser.parse_buffer(File.open(context.sheet_path))

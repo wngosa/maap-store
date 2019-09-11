@@ -1,6 +1,6 @@
 require 'rubyXL/convenience_methods/cell'
 
-module AnonymizeElectronicPharmacyStockRecord
+module Sheets
   class RemoveFields
     include Interactor
 
@@ -84,26 +84,26 @@ module AnonymizeElectronicPharmacyStockRecord
 
     def date_columns
       @date_columns ||=
-        context.electronic_pharmacy_stock_record.date.each_with_index.select { |c| c[0] }
+        context.record.date.each_with_index.select { |c| c[0] }
     end
 
     def columns_to_offuscate # rubocop:disable Metrics/AbcSize
       return @columns_to_offuscate if @columns_to_offuscate
 
-      if context.electronic_pharmacy_stock_record.phi.is_a? Array
+      if context.record.phi.is_a? Array
         return @columns_to_offuscate =
-                 context.electronic_pharmacy_stock_record.phi.each_with_index.select { |c| c[0] }.map(&:last)
+                 context.record.phi.each_with_index.select { |c| c[0] }.map(&:last)
       end
       @columns_to_offuscate =
-        context.electronic_pharmacy_stock_record.phi.values.each_with_index.select { |c| c[0] }.map(&:last)
+        context.record.phi.values.each_with_index.select { |c| c[0] }.map(&:last)
     end
 
     def first_row
-      @first_row ||= context.electronic_pharmacy_stock_record.data_rows_from
+      @first_row ||= context.record.data_rows_from
     end
 
     def last_row
-      @last_row ||= context.electronic_pharmacy_stock_record.data_rows_to
+      @last_row ||= context.record.data_rows_to
     end
   end
 end

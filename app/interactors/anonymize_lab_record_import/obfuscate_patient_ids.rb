@@ -9,21 +9,21 @@ module AnonymizeLabRecordImport
 
       header_cell =
         read_cell(
-          context.lab_record_import.header_row - 1, context.lab_record_import.patient_id_index
+          context.record.header_row - 1, context.record.patient_id_index
         ).to_s
       if header_cell.empty?
         update_cell(
-          context.lab_record_import.header_row - 1,
-          context.lab_record_import.patient_id_index,
+          context.record.header_row - 1,
+          context.record.patient_id_index,
           'Patient Id'
         )
       end
-      context.lab_record_import.lab_records.obfuscated.order(row: :asc).each do |lab_record|
+      context.record.lab_records.obfuscated.order(row: :asc).each do |lab_record|
         Rails.logger.info "Lab record #{lab_record.id} #{lab_record.row}"
 
         update_cell(
           mapped_row_number(lab_record),
-          context.lab_record_import.patient_id_index,
+          context.record.patient_id_index,
           lab_record.patient_id
         )
       end
@@ -32,7 +32,7 @@ module AnonymizeLabRecordImport
     private
 
     def mapped_row_number(lab_record)
-      lab_record.row + context.lab_record_import.data_rows_from - 1
+      lab_record.row + context.record.data_rows_from - 1
     end
 
     def read_cell(row, col)
@@ -76,11 +76,11 @@ module AnonymizeLabRecordImport
     end
 
     def first_row
-      @first_row ||= context.lab_record_import.data_rows_from
+      @first_row ||= context.record.data_rows_from
     end
 
     def last_row
-      @last_row ||= context.lab_record_import.data_rows_to
+      @last_row ||= context.record.data_rows_to
     end
   end
 end

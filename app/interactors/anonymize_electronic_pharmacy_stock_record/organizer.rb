@@ -2,9 +2,9 @@ module AnonymizeElectronicPharmacyStockRecord
   class Organizer
     include Interactor::Organizer
 
-    organize AnonymizeElectronicPharmacyStockRecord::ReadSheet,
-             AnonymizeElectronicPharmacyStockRecord::RemoveFields,
-             AnonymizeElectronicPharmacyStockRecord::SaveSheet,
-             AnonymizeElectronicPharmacyStockRecord::PruneTableFields
+    organize Sheets::ReadSheet,
+             Sheets::RemoveFields,
+             Sheets::SaveSheet,
+             Sheets::PruneTableFields
   end
 end

@@ -3,13 +3,14 @@ class AnonymizeElectronicPharmacyStockRecordWorker
 
   sidekiq_options retry: false
 
-  def perform(record_id, patient_ids = false)
+  def perform(record_id)
     @record_id = record_id
     logger.info "Starting anonymization of #{electronic_pharmacy_stock_record.id}"
 
     AnonymizeElectronicPharmacyStockRecord::Organizer.call(
-      electronic_pharmacy_stock_record: electronic_pharmacy_stock_record,
-      patient_ids: patient_ids
+      record: electronic_pharmacy_stock_record,
+      patient_ids: false,
+      state_attribute: :obfuscation_state
     )
 
     logger.info "Finished anonymization of #{electronic_pharmacy_stock_record.id}"
