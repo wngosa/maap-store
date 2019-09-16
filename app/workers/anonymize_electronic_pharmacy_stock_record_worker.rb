@@ -10,7 +10,8 @@ class AnonymizeElectronicPharmacyStockRecordWorker
     AnonymizeElectronicPharmacyStockRecord::Organizer.call(
       record: electronic_pharmacy_stock_record,
       patient_ids: false,
-      state_attribute: :obfuscation_state
+      state_attribute: :obfuscation_state,
+      obfuscate_on_finish: true
     )
 
     logger.info "Finished anonymization of #{electronic_pharmacy_stock_record.id}"

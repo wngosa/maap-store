@@ -10,7 +10,8 @@ class AnonymizeLabRecordImportWorker
     AnonymizeLabRecordImport::Organizer.call(
       record: lab_record_import,
       patient_ids: patient_ids,
-      state_attribute: :patient_id_state
+      state_attribute: :patient_id_state,
+      obfuscate_on_finish: patient_ids
     )
 
     logger.info "Finished anonymization of #{lab_record_import.id}"

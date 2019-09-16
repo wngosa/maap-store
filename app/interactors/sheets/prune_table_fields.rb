@@ -12,7 +12,7 @@ module Sheets
     private
 
     def send_to_obfuscated_state!
-      context.record[context.state_attribute] = :obfuscated
+      context.record[context.state_attribute] = :obfuscated if context.obfuscate_on_finish
     end
   end
 end
