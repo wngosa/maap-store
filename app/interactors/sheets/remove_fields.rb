@@ -37,6 +37,8 @@ module Sheets
     private
 
     def parse_date(date, format)
+      return date if date.is_a? DateTime
+
       Date.strptime(date, FORMATS[format.to_sym])
     rescue ArgumentError, TypeError
       nil
