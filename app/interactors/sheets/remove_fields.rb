@@ -80,7 +80,8 @@ module Sheets
 
     def update_cell_xlsx(row, col, content)
       context.current_sheet[row][col].change_contents(
-        content
+        '',
+        "\"#{content}\""
       )
     end
 
