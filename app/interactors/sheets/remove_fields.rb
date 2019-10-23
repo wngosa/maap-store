@@ -45,12 +45,10 @@ module Sheets
     private
 
     def parse_date(date, format)
-      return date if (date.is_a?(DateTime) || date.is_a?(Date))
-      Rails.logger.info FORMATS[format.to_sym]
-      Rails.logger.info date
+      return date if date.is_a?(DateTime) || date.is_a?(Date)
+
       Date.strptime(date, FORMATS[format.to_sym])
-    rescue ArgumentError, TypeError => e
-      Rails.logger.info e
+    rescue ArgumentError, TypeError
       nil
     end
 
