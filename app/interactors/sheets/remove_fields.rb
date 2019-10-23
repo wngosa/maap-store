@@ -7,9 +7,17 @@ module Sheets
     OFFUSCATED_TEXT = 'Not available'.freeze
     INVALID_DATE = 'Invalid date format'.freeze
     FORMATS = {
-      DDMMYYYY: '%d%m%Y',
-      MMDDYYYY: '%m%d%Y',
-      DDMMMYYYY: '%d%b%Y'
+      'DD/MM/YYYY': '%d/%m/%Y',
+      'DD/MM/YY': '%d/%m/%y',
+      'MM/DD/YYYY': '%m/%d/%Y',
+      'MM/DD/YY': '%m/%d/%y',
+      DDMMMYYYY: '%d%b%Y',
+      DDMMMYY: '%d%b%y',
+      'MM-DD-YYYY': '%m-%d-%Y',
+      'MM-DD-YY': '%m-%d-%y',
+      'DD-MM-YYYY': '%d-%m-%Y',
+      'DD-MM-YY': '%d-%m-%y',
+      'YYYY-MM-DD': '%Y-%m-%d'
     }.freeze
 
     def call # rubocop:disable Metrics/MethodLength, Metrics/AbcSize
@@ -37,10 +45,12 @@ module Sheets
     private
 
     def parse_date(date, format)
-      return date if date.is_a? DateTime
-
+      return date if (date.is_a?(DateTime) || date.is_a?(Date))
+      Rails.logger.info FORMATS[format.to_sym]
+      Rails.logger.info date
       Date.strptime(date, FORMATS[format.to_sym])
-    rescue ArgumentError, TypeError
+    rescue ArgumentError, TypeError => e
+      Rails.logger.info e
       nil
     end
 
