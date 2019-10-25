@@ -31,12 +31,12 @@ module Sheets
         date_columns.each do |column|
           date_format, column_number = column
           parsed_date =
-            parse_date(read_cell(row_number, column_number), date_format)
+            parse_date(read_cell(row_number - 1, column_number), date_format)
           if parsed_date
             update_cell(row_number - 1, column_number,
                         parsed_date.beginning_of_month.strftime('%d/%m/%Y'))
           else
-            update_cell(row_number - 1, column_number, INVALID_DATE)
+            update_cell(row_number - 1, column_number, read_cell(row_number, column_number))
           end
         end
       end
