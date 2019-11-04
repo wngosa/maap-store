@@ -36,7 +36,7 @@ module Sheets
             update_cell(row_number - 1, column_number,
                         parsed_date.beginning_of_month.strftime('%d/%m/%Y'))
           else
-            update_cell(row_number - 1, column_number, read_cell(row_number, column_number))
+            update_cell(row_number - 1, column_number, INVALID_DATE)
           end
         end
       end
