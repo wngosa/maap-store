@@ -31,8 +31,17 @@ function toggleControls() {
   var isSpeciality = document.getElementById("site_is_specialty_hospital");
   var specialityMulti = document.getElementById("site_specialties_input");
   var specialityOther = document.getElementById("site_other_specialties_input");
+  const nonCmsCheckbox = document.querySelectorAll('.js-non-cms-selector');
 
   // Conditional display logic
+  const toggleNonCMS = () => {
+    if(!hasCms.checked) return nonCmsCheckbox.forEach(checkbox => checkbox.disabled = false)
+    nonCmsCheckbox.forEach(checkbox => {
+      checkbox.checked = false;
+      checkbox.disabled = true;
+    })
+  }
+  
   var toggleHospitalAndLaboratories = function() {
     hospitalAndLaboratoriesPanel.hidden = !hasHospital.checked && !hasLaboratory.checked;
   }
@@ -59,6 +68,7 @@ function toggleControls() {
     togglePharmacies,
     togglePharmaciesAndCms,
     toggleCms,
+    toggleNonCMS,
     toggleSpecialityControls
   ];
 
