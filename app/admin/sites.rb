@@ -50,10 +50,10 @@ ActiveAdmin.register Site do
       input :registration_number, label: 'Facility Registration/Licence No.'
       input :registration_body, label: 'Facility Registration body'
 
-      input :has_hospital
-      input :has_laboratory
-      input :has_pharmacy
-      input :has_cms, label: 'Has CMS'
+      input :has_hospital, input_html: { class: 'js-non-cms-selector' }
+      input :has_laboratory, input_html: { class: 'js-non-cms-selector' }
+      input :has_pharmacy, input_html: { class: 'js-non-cms-selector' }
+      input :has_cms, label: 'Is CMS', wrapper_html: { class: 'has_cms' }
 
       input :location_type, as: :select, collection: location_types,
         label: 'What is the setting in which Site is located?',
