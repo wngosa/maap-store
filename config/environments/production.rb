@@ -86,4 +86,5 @@ Rails.application.configure do
   config.active_record.dump_schema_after_migration = false
 
   config.active_storage.service = :production
+  config.assets.precompile += %w[active_admin.css active_admin.js]
 end
