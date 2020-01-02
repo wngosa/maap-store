@@ -14,6 +14,7 @@ gem 'uglifier', '>= 1.3.0'
 gem 'active_model_serializers', '~> 0.10.0'
 gem 'activeadmin'
 gem 'activeadmin_dynamic_fields'
+gem 'aws-sdk-s3', '~> 1'
 gem 'devise'
 gem 'devise_token_auth'
 gem 'interactor-rails'
@@ -24,6 +25,8 @@ gem 'sidekiq-scheduler'
 gem 'spreadsheet'
 
 group :development, :test do
+  gem 'dotenv-rails'
+
   gem 'pry-rails'
 
   gem 'rubocop'

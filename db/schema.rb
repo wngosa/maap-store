@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_11_135136) do
+ActiveRecord::Schema.define(version: 2019_12_27_165827) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -99,6 +99,7 @@ ActiveRecord::Schema.define(version: 2019_09_11_135136) do
     t.integer "obfuscation_state"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "s3_file_path"
     t.index ["site_id"], name: "index_electronic_pharmacy_stock_records_on_site_id"
   end
 
@@ -115,6 +116,7 @@ ActiveRecord::Schema.define(version: 2019_09_11_135136) do
     t.datetime "updated_at", null: false
     t.bigint "site_id"
     t.string "patient_id_state", default: "pending"
+    t.string "s3_file_path"
     t.index ["site_id"], name: "index_lab_record_imports_on_site_id"
   end
 
