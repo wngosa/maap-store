@@ -22,10 +22,9 @@ module S3
     end
 
     def key
-      [Rails.application.secrets.aws_s3_prefix,
-       context.record.class.name.underscore,
-       context.record.id,
-       extension].join('/')
+      "#{[Rails.application.secrets.aws_s3_prefix,
+          context.record.class.name.underscore,
+          context.record.id].join('/')}.#{extension}"
     end
   end
 end
