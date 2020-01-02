@@ -21,3 +21,4 @@ test
 coverage
 public/system
 storage/**/*
+.env

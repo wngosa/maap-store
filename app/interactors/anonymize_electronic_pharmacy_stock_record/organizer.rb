@@ -5,6 +5,7 @@ module AnonymizeElectronicPharmacyStockRecord
     organize Sheets::ReadSheet,
              Sheets::RemoveFields,
              Sheets::SaveSheet,
-             Sheets::PruneTableFields
+             Sheets::PruneTableFields,
+             S3::Upload
   end
 end

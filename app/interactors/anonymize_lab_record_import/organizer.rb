@@ -6,6 +6,7 @@ module AnonymizeLabRecordImport
              AnonymizeLabRecordImport::ObfuscatePatientIds,
              Sheets::RemoveFields,
              Sheets::SaveSheet,
-             Sheets::PruneTableFields
+             Sheets::PruneTableFields,
+             S3::Upload
   end
 end
