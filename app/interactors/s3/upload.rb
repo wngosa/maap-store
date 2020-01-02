@@ -3,12 +3,17 @@ module S3
     include Interactor
 
     def call
-      Aws::S3::Resource.new.bucket(Rails.application.secrets.aws_s3_bucket)
-                       .object(key).upload_file(local_file_path)
+      context.record.reload
+      upload_file!
       context.record.update(s3_file_path: key)
     end
 
     private
+
+    def upload_file!
+      Aws::S3::Resource.new.bucket(Rails.application.secrets.aws_s3_bucket)
+                       .object(key).upload_file(local_file_path)
+    end
 
     def local_file_path
       ActiveStorage::Blob.service.send(
