@@ -1,5 +1,5 @@
 ActiveAdmin.register AntibioticConsumptionStat do
-  actions :edit, :update, :show, :index
+  actions :edit, :update, :show, :index, :destroy
 
   permit_params :date, :antibiotic_id, :issued, :quantity, :balance,
                 :recipient_facility, :recipient_unit, :site_id
