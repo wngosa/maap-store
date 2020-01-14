@@ -7,6 +7,10 @@ Rails.application.routes.draw do
   devise_for :users
 
   mount Sidekiq::Web => '/sidekiq'
+  Sidekiq::Web.use Rack::Auth::Basic do |username, password|
+    username == ENV.fetch('SIDEKIQ_USER', 'user') &&
+      password == ENV.fetch('SIDEKIQ_PASSWORD', 'password')
+  end
   namespace :api do
     namespace :v1 do
       mount_devise_token_auth_for 'User', at: 'auth', controllers: { sessions: 'api/v1/sessions' }
