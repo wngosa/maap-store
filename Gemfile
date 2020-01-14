@@ -23,7 +23,6 @@ gem 'rubyXL'
 gem 'sidekiq'
 gem 'sidekiq-scheduler'
 gem 'spreadsheet'
-gem 'acts_as_paranoid', '~> 0.6.0'
 
 group :development, :test do
   gem 'dotenv-rails'
