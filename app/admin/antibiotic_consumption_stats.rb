@@ -1,8 +1,19 @@
 ActiveAdmin.register AntibioticConsumptionStat do
+  preserve_default_filters!
+
   actions :edit, :update, :show, :index, :destroy
 
   permit_params :date, :antibiotic_id, :issued, :quantity, :balance,
                 :recipient_facility, :recipient_unit, :site_id
+
+  filter :antibiotic, collection: -> {
+    Antibiotic.all.map do |antibiotic|
+      [
+        "#{antibiotic.name} #{antibiotic.form} #{antibiotic.brand} #{antibiotic.strength_value} #{antibiotic.strength_unit}", 
+        antibiotic.id
+      ]
+    end
+  }
 
   csv do
     column :id
