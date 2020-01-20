@@ -9,7 +9,7 @@ ActiveAdmin.register AntibioticConsumptionStat do
   filter :antibiotic, collection: -> {
     Antibiotic.all.map do |antibiotic|
       [
-        "#{antibiotic.name} #{antibiotic.form} #{antibiotic.brand} #{antibiotic.strength_value} #{antibiotic.strength_unit}", 
+        "#{antibiotic.name} #{antibiotic.form} #{antibiotic.strength_value}#{antibiotic.strength_unit} (#{antibiotic.brand})", 
         antibiotic.id
       ]
     end
