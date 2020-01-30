@@ -18,7 +18,7 @@ module AnonymizeLabRecordImport
           'Patient Id'
         )
       end
-      context.record.lab_records.obfuscated.order(row: :asc).each do |lab_record|
+      context.record.lab_records.obfuscated.order(row: :asc).find_each do |lab_record|
         Rails.logger.info "Lab record #{lab_record.id} #{lab_record.row}"
 
         update_cell(
