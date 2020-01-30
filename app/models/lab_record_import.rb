@@ -3,7 +3,7 @@ class LabRecordImport < ApplicationRecord
   has_one_attached :sheet_file
   has_many :lab_records, dependent: :destroy
 
-  accepts_nested_attributes_for :lab_records
+  # accepts_nested_attributes_for :lab_records
 
   def name
     id

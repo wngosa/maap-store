@@ -2,12 +2,11 @@ class ObfuscatePatientIdsWorker
   include Sidekiq::Worker
 
   def perform
+    @patient_ids = {}
     obfuscate_patients
 
-    ActiveRecord::Base.transaction do
-      obfuscate_lab_records.map do |lab_record_import_id|
-        AnonymizeLabRecordImportWorker.perform_async(lab_record_import_id, true)
-      end
+    obfuscate_lab_records.map do |lab_record_import_id|
+      AnonymizeLabRecordImportWorker.perform_async(lab_record_import_id, true)
     end
   end
 
@@ -24,12 +23,13 @@ class ObfuscatePatientIdsWorker
 
   def obfuscate_lab_records # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
     lab_record_imports = Set.new
-    LabRecord.obfuscation_pending.includes(:lab_record_import).each do |lab_record|
+    LabRecord.obfuscation_pending.includes(:lab_record_import)
+             .find_each(batch_size: 500) do |lab_record|
       Rails.logger.info "Obfuscating lab record #{lab_record.id}"
 
       if lab_record.patient_id.present?
         lab_record.patient_id =
-          patient_id_hash_for(lab_record.patient_id, lab_record.site_id).hashed_value
+          patient_id_hash_for(lab_record.patient_id, lab_record.site_id)
       end
       lab_record.patient_id_state = 'obfuscated'
       lab_record.save!
@@ -40,10 +40,15 @@ class ObfuscatePatientIdsWorker
   end
 
   def patient_id_hash_for(patient_id, site_id)
-    PatientIdHash.find_or_initialize_by(patient_id: patient_id,
-                                        site_id: site_id) do |patient_id_hash|
-      patient_id_hash.hashed_value = SecureRandom.uuid
-      patient_id_hash.save
-    end
+    return @patient_ids[site_id][patient_id] if (@patient_ids[site_id] || {})[patient_id]
+
+    @patient_ids[site_id] ||= {}
+    @patient_ids[site_id][patient_id] =
+      PatientIdHash.find_or_initialize_by(
+        patient_id: patient_id, site_id: site_id
+      ) do |patient_id_hash|
+        patient_id_hash.hashed_value = SecureRandom.uuid
+        patient_id_hash.save
+      end.hashed_value
   end
 end

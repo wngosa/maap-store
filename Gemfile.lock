@@ -52,6 +52,8 @@ GEM
       activemodel (= 5.2.0)
       activesupport (= 5.2.0)
       arel (>= 9.0)
+    activerecord-import (1.0.4)
+      activerecord (>= 3.2)
     activestorage (5.2.0)
       actionpack (= 5.2.0)
       activerecord (= 5.2.0)
@@ -371,6 +373,7 @@ DEPENDENCIES
   active_model_serializers (~> 0.10.0)
   activeadmin
   activeadmin_dynamic_fields
+  activerecord-import
   aws-sdk-s3 (~> 1)
   database_cleaner
   devise

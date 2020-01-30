@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_27_165827) do
+ActiveRecord::Schema.define(version: 2020_01_07_160148) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -60,7 +60,9 @@ ActiveRecord::Schema.define(version: 2019_12_27_165827) do
     t.string "recipient_facility"
     t.string "recipient_unit"
     t.bigint "site_id"
+    t.datetime "deleted_at"
     t.index ["antibiotic_id"], name: "index_antibiotic_consumption_stats_on_antibiotic_id"
+    t.index ["deleted_at"], name: "index_antibiotic_consumption_stats_on_deleted_at"
     t.index ["site_id"], name: "index_antibiotic_consumption_stats_on_site_id"
   end
 
