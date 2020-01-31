@@ -3,7 +3,7 @@ module Sheets
     include Interactor
 
     def call # rubocop:disable Metrics/MethodLength, Metrics/AbcSize
-      Rails.logger.info "Starting reading file"
+      Rails.logger.info 'Starting reading file'
       begin
         context.sheet_path =
           ActiveStorage::Blob.service.send(

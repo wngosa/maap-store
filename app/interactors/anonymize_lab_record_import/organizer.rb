@@ -7,6 +7,6 @@ module AnonymizeLabRecordImport
              Sheets::RemoveFields,
              Sheets::SaveSheet,
              Sheets::PruneTableFields
-             # S3::Upload
+    # S3::Upload
   end
 end
