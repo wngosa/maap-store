@@ -1,4 +1,4 @@
 :schedule:
   obfuscate_patient_ids:
-    cron: '0 */45 * * * *'
+    cron: '0 */10 * * * *'
     class: ObfuscatePatientIdsWorker
