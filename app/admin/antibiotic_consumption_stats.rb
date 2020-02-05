@@ -44,5 +44,7 @@ ActiveAdmin.register AntibioticConsumptionStat do
     column :recipient_facility
     column :recipient_unit
     column :site
+
+    actions
   end
 end
