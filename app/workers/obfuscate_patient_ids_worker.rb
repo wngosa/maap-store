@@ -15,7 +15,7 @@ class ObfuscatePatientIdsWorker
   def obfuscate_patients
     Patient.obfuscation_pending.find_each do |patient|
       Rails.logger.info "Obfuscating patient#{patient.id}"
-      patient.patient_id = patient_id_hash_for(patient.patient_id, patient.site_id).hashed_value
+      patient.patient_id = patient_id_hash_for(patient.patient_id, patient.site_id)
       patient.patient_id_state = 'obfuscated'
       patient.save!
     end
