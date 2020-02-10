@@ -13,7 +13,6 @@ module Sheets
         context.sheet_type = :xlsx
         context.sheet_file =
           RubyXL::Parser.parse(context.sheet_path)
-        context.current_sheet = context.sheet_file.worksheets[0]
         context.record[context.state_attribute] = :error
         context.record.error_message = 'XLSX files not supported'
         context.save!
