@@ -2,8 +2,8 @@ ActiveAdmin.register LabRecordImport do
   index :download_links => false do
     column :id
     column :file do |lab_record|
-      next 'Error' unless lab_record.error?
       next 'Obfuscating' unless lab_record.obfuscated?
+      next 'Error' if lab_record.error?
       link_to 'Download',
               rails_blob_path(lab_record.sheet_file, disposition: 'attachment'),
               download: true
