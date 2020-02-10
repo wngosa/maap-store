@@ -13,9 +13,10 @@ module Sheets
         context.sheet_type = :xlsx
         context.sheet_file =
           RubyXL::Parser.parse(context.sheet_path)
+        Rails.logger.info 'XLSX opened'
         context.record[context.state_attribute] = :error
         context.record.error_message = 'XLSX files not supported'
-        context.save!
+        context.record.save!
         context.fail!
       rescue NoMethodError, Zip::Error
         Rails.logger.info 'Falling back to spreadsheet gem'
