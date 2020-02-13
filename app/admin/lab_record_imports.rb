@@ -13,7 +13,7 @@ ActiveAdmin.register LabRecordImport do
     column :header_row
     column :data_rows_from
     column :data_rows_to
-    column :patient_id_state
+    column :obfuscation_state
     column :error_message
   end
 end

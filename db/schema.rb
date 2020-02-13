@@ -102,6 +102,7 @@ ActiveRecord::Schema.define(version: 2020_02_10_161726) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "s3_file_path"
+    t.string "file_name"
     t.string "error_message"
     t.index ["site_id"], name: "index_electronic_pharmacy_stock_records_on_site_id"
   end
@@ -120,6 +121,7 @@ ActiveRecord::Schema.define(version: 2020_02_10_161726) do
     t.bigint "site_id"
     t.string "patient_id_state", default: "pending"
     t.string "s3_file_path"
+    t.string "file_name"
     t.string "error_message"
     t.index ["site_id"], name: "index_lab_record_imports_on_site_id"
   end

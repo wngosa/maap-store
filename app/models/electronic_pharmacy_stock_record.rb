@@ -16,7 +16,7 @@ class ElectronicPharmacyStockRecord < ApplicationRecord
   end
 
   def error?
-    patient_id_state == 'error'
+    obfuscation_state == 'error'
   end
 
   def rows
