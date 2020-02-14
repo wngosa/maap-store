@@ -10,17 +10,25 @@ module Sheets
             :path_for,
             context.record.sheet_file.key
           )
+        file_type = `file --b --mime-type '#{context.sheet_path}'`.strip
+        Rails.logger.info file_type
+        raise Zip::Error unless file_type == 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' # rubocop:disable Metrics/LineLength
+
+        Rails.logger.info 'XLSX opened'
         context.sheet_type = :xlsx
-        context.sheet_file =
-          RubyXL::Parser.parse(context.sheet_path)
-        context.current_sheet = context.sheet_file.worksheets[0]
+
+        context.record[context.state_attribute] = :error
+        context.record.error_message = 'XLSX files not supported'
+        context.record.save!
+        context.fail!
       rescue NoMethodError, Zip::Error
         Rails.logger.info 'Falling back to spreadsheet gem'
         context.sheet_type = :xls
         context.sheet_file = Spreadsheet.open(context.sheet_path)
         context.current_sheet = context.sheet_file.worksheets[0]
       end
-    rescue Ole::Storage::FormatError
+    rescue Ole::Storage::FormatError => e
+      Rails.logger.info e
       Rails.logger.info 'Falling back to csv'
       context.sheet_type = :csv
       context.sheet_file = CSV.read(context.sheet_path)

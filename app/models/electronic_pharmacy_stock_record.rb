@@ -15,6 +15,10 @@ class ElectronicPharmacyStockRecord < ApplicationRecord
     obfuscation_state == 'obfuscated'
   end
 
+  def error?
+    obfuscation_state == 'error'
+  end
+
   def rows
     JSON[self[:rows]]
   end

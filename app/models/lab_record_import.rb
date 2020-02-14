@@ -9,6 +9,10 @@ class LabRecordImport < ApplicationRecord
     id
   end
 
+  def error?
+    patient_id_state == 'error'
+  end
+
   def obfuscated?
     patient_id_state == 'obfuscated'
   end
