@@ -1,4 +1,6 @@
 ActiveAdmin.register ElectronicPharmacyStockRecord do
+  actions :index, :show
+
   index :download_links => false do
     column :id
     column :file do |electronic_pharmacy_stock_record|
