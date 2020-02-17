@@ -15,5 +15,6 @@ ActiveAdmin.register ElectronicPharmacyStockRecord do
     column :data_rows_to
     column :obfuscation_state
     column :error_message
+    column :uploaded_at
   end
 end

@@ -31,6 +31,7 @@ module Api
           whitelisted[:columns] = params[:columns] if params[:columns]
           whitelisted[:phi] = params[:phi] if params[:phi]
           whitelisted[:date] = params[:date] if params[:date]
+          whitelisted[:uploaded_at] = params[:created_at] if params[:created_at]
         end
       end
     end
