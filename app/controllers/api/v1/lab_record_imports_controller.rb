@@ -42,7 +42,7 @@ module Api
         end
       end
 
-      def permitted_params # rubocop:disable Metrics/AbcSize
+      def permitted_params # rubocop:disable Metrics/AbcSize, Metrics/CyclomaticComplexity
         params.permit(
           :name, :header_row, :data_rows_from, :data_rows_to, :sheet_file, :site_id, :file_name
         ).tap do |whitelisted|
@@ -51,6 +51,7 @@ module Api
           whitelisted[:patient_or_lab_record_id] = params[:patient_or_lab_record_id] if params[:patient_or_lab_record_id] # rubocop:disable Metrics/LineLength
           whitelisted[:phi] = params[:phi] if params[:phi]
           whitelisted[:date] = params[:date] if params[:date]
+          whitelisted[:uploaded_at] = params[:created_at] if params[:created_at]
         end
       end
     end
