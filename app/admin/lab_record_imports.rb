@@ -1,4 +1,6 @@
 ActiveAdmin.register LabRecordImport do
+  actions :index, :show
+
   index :download_links => false do
     column :id
     column :file do |lab_record|
