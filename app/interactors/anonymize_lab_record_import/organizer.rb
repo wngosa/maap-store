@@ -9,10 +9,11 @@ module AnonymizeLabRecordImport
              Sheets::PruneTableFields,
              S3::Upload
 
-    def call
+    def call # rubocop:disable AbcSize
       super
-    rescue => e
+    rescue StandardError => e
       return context unless context.state_attribute && context.record
+
       context.record[context.state_attribute] = :error
       context.record.error_message = 'Unknown error'
       context.record.raw_error_message = e.inspect
