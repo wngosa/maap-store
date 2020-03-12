@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_02_14_203339) do
+ActiveRecord::Schema.define(version: 2020_03_12_145304) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -105,6 +105,7 @@ ActiveRecord::Schema.define(version: 2020_02_14_203339) do
     t.string "file_name"
     t.string "error_message"
     t.datetime "uploaded_at"
+    t.string "raw_error_message"
     t.index ["site_id"], name: "index_electronic_pharmacy_stock_records_on_site_id"
   end
 
@@ -125,6 +126,7 @@ ActiveRecord::Schema.define(version: 2020_02_14_203339) do
     t.string "file_name"
     t.string "error_message"
     t.datetime "uploaded_at"
+    t.string "raw_error_message"
     t.index ["site_id"], name: "index_lab_record_imports_on_site_id"
   end
 
