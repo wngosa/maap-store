@@ -25,6 +25,7 @@ gem 'rubyXL'
 gem 'sidekiq'
 gem 'sidekiq-scheduler'
 gem 'spreadsheet'
+gem 'memory_profiler'
 
 group :development, :test do
   gem 'dotenv-rails'
