@@ -1,7 +1,7 @@
 module Api
   module V1
     class LabRecordImportsController < ApplicationController
-      def create
+      def create # rubocop:disable Metrics/MethodLength
         lab_record_import = build_lab_record_import
 
         if lab_record_import.save
@@ -9,7 +9,11 @@ module Api
             lab_record_import.id,
             params[:lab_records_attributes]
           )
-          render json: lab_record_import, status: :created
+          render json: {
+            id: lab_record_import.id,
+            created_at: lab_record_import.created_at,
+            updated_at: lab_record_import.updated_at
+          }, status: :created
         else
           render json: lab_record_import.errors, status: :unprocessable_entity
         end
