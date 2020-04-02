@@ -1,14 +1,18 @@
 module Api
   module V1
     class ElectronicPharmacyStockRecordsController < ApplicationController
-      def create
+      def create # rubocop:disable Metrics/MethodLength
         electronic_pharmacy_stock_record = build_electronic_pharmacy_stock_record
 
         if electronic_pharmacy_stock_record.save
           AnonymizeElectronicPharmacyStockRecordWorker.perform_async(
             electronic_pharmacy_stock_record.id
           )
-          render json: electronic_pharmacy_stock_record, status: :created
+          render json: {
+            id: electronic_pharmacy_stock_record.id,
+            created_at: electronic_pharmacy_stock_record.created_at,
+            uploaded_at: electronic_pharmacy_stock_record.uploaded_at
+          }, status: :created
         else
           render json: electronic_pharmacy_stock_record.errors, status: :unprocessable_entity
         end
