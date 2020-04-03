@@ -33,4 +33,5 @@ Rails.application.routes.draw do
       resources :electronic_pharmacy_stock_records, only: [:create]
     end
   end
+  root :to => "status#index"
 end
