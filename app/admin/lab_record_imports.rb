@@ -1,6 +1,8 @@
 ActiveAdmin.register LabRecordImport do
   actions :index, :show
 
+  includes :site
+
   index :download_links => false do
     column :id
     column :file do |lab_record|
@@ -15,8 +17,14 @@ ActiveAdmin.register LabRecordImport do
     column :header_row
     column :data_rows_from
     column :data_rows_to
-    column :obfuscation_state
     column :error_message
     column :uploaded_at
   end
+
+  filter :site
+  filter :file_name
+  filter :header_row
+  filter :error_message
+  filter :created_at
+  filter :uploaded_at
 end

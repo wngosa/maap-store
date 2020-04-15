@@ -1,6 +1,8 @@
 ActiveAdmin.register ElectronicPharmacyStockRecord do
   actions :index, :show
 
+  includes :site
+
   index :download_links => false do
     column :id
     column :file do |electronic_pharmacy_stock_record|
@@ -19,4 +21,12 @@ ActiveAdmin.register ElectronicPharmacyStockRecord do
     column :error_message
     column :uploaded_at
   end
+
+  filter :site
+  filter :obfuscation_state
+  filter :file_name
+  filter :header_row
+  filter :error_message
+  filter :created_at
+  filter :uploaded_at
 end
