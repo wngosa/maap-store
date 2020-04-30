@@ -3,13 +3,15 @@ module Sheets
     include Interactor
 
     def call # rubocop:disable Metrics/AbcSize
-      file_id = (context.record.site_id || 'unknown-site').to_s
-      filename = "#{file_id}-#{context.record.file_name}"
+      site_id = (context.record.site_id || 'unknown-site').to_s
+      file_id = context.record.sheet_file.id.to_s
+      original_filename = context.record.file_name.sub(".#{file_extension}", '')
+      filename = "#{file_id}-#{original_filename}-#{site_id}.#{file_extension}"
 
       save_file!
       context.record.sheet_file.attach(
         io: File.open(context.sheet_path),
-        filename: "#{filename}.#{file_extension}"
+        filename: filename
       )
       context.record.save!
     end
