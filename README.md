@@ -33,3 +33,9 @@ $ docker-compose run --rm app bundle exec rspec
 # Run seeds
 $ docker-compose run --rm app bundle exec rails db:seed
 ```
+
+## Others
+
+* [Deployment](docs/DEPLOYMENT.md)
+
+
