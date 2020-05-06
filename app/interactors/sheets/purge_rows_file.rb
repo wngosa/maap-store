@@ -1,10 +1,10 @@
 module Sheets
-  class PruneTableFields
+  class PurgeRowsFile
     include Interactor
 
-    def call
-      Rails.logger.info "Pruning raw rows for record #{context.record.class} #{context.record.id}"
-      context.record.rows = {}
+    def call # rubocop:disable Metrics/AbcSize
+      Rails.logger.info "Purging rows_file for record #{context.record.class} #{context.record.id}"
+      context.record.rows_file.purge_later
       send_to_obfuscated_state!
       context.record.save!
     end

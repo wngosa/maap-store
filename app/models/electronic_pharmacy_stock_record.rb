@@ -1,6 +1,7 @@
 class ElectronicPharmacyStockRecord < ApplicationRecord
   belongs_to :site
   has_one_attached :sheet_file
+  has_one_attached :rows_file
 
   enum obfuscation_state: {
     pending: 0,
@@ -18,10 +19,6 @@ class ElectronicPharmacyStockRecord < ApplicationRecord
 
   def error?
     obfuscation_state == 'error'
-  end
-
-  def rows
-    JSON[self[:rows]]
   end
 
   def columns

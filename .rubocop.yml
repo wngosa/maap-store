@@ -41,3 +41,9 @@ Style/FrozenStringLiteralComment:
 
 Metrics/LineLength:
   Max: 100
+
+Security/JSONLoad:
+  Enabled: false
+
+Security/Open:
+  Enabled: false
