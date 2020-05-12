@@ -1,35 +1,7 @@
-[![Build Status](https://travis-ci.org/instedd/maap-store.svg?branch=master)](https://travis-ci.org/instedd/maap-store)
-
 # Maap Store
 
-## Development environment
+[![Build Status](https://travis-ci.org/instedd/maap-store.svg?branch=master)](https://travis-ci.org/instedd/maap-store)
 
-* Install Docker
-* Start database & webserver:
+A desktop app for health data collection, to be used along [maap-collector](https://github.com/instedd/maap-collector).
 
-```
-$ docker-compose up
-```
-* Run seeds:
-
-```
-$ docker-compose run --rm app bundle exec rails db:seed
-```
-
-Open [http://localhost:3000/admin](http://localhost:3000/admin)
-
-### Useful commands
-
-```
-# Open a terminal in the web server directory
-$ docker-compose run app bash
-
-# Run linter and autofixes if needed
-$ docker-compose run app bundle exec rubocop -a
-
-# Run tests
-$ docker-compose run --rm app bundle exec rspec
-
-# Run seeds
-$ docker-compose run --rm app bundle exec rails db:seed
-```
+Head over to the [project's wiki](https://github.com/instedd/maap-store/wiki) to learn how to set up a local environment and find useful technical information!
