@@ -14,6 +14,8 @@ module AnonymizeLabRecordImport
     rescue StandardError => e
       return context unless context.state_attribute && context.record
 
+      Rails.logger.info "Error when processing LabRecordImport #{context.record.id}"
+      Rails.logger.info e.inspect
       context.record[context.state_attribute] = :error
       context.record.error_message = 'Unknown error'
       context.record.raw_error_message = e.inspect

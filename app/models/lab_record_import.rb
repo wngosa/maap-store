@@ -1,7 +1,6 @@
 class LabRecordImport < ApplicationRecord
   belongs_to :site
   has_one_attached :sheet_file
-  has_one_attached :lab_records_attributes_file
   has_one_attached :rows_file
   has_many :lab_records, dependent: :destroy
 

@@ -25,8 +25,6 @@ class ObfuscatePatientIdsWorker
     lab_record_imports = Set.new
     LabRecord.obfuscation_pending.includes(:lab_record_import)
              .find_each(batch_size: 500) do |lab_record|
-      Rails.logger.info "Obfuscating lab record #{lab_record.id}"
-
       if lab_record.patient_id.present?
         lab_record.patient_id =
           patient_id_hash_for(lab_record.patient_id, lab_record.site_id)
