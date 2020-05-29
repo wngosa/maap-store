@@ -11,7 +11,7 @@ services:
       - db
       - cache
     env_file: docker-env.env
-    command: /bin/sh -c './bin/update && bundle exec rails s -p 3000 -b "0.0.0.0"'
+    command: /bin/sh -c './bin/app_update && bundle exec rails s -p 3000 -b "0.0.0.0"'
     volumes:
       - .:/app
     environment:
@@ -26,7 +26,7 @@ services:
       - db
       - cache
     env_file: docker-env.env
-    command: /bin/sh -c './bin/update && bundle exec sidekiq'
+    command: /bin/sh -c './bin/workers_update && bundle exec sidekiq'
     volumes:
       - .:/app
     environment:
