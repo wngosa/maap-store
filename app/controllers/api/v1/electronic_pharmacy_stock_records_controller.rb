@@ -1,7 +1,7 @@
 module Api
   module V1
     class ElectronicPharmacyStockRecordsController < ApplicationController
-      def create # rubocop:disable Metrics/MethodLength
+      def create
         electronic_pharmacy_stock_record = build_electronic_pharmacy_stock_record
 
         if electronic_pharmacy_stock_record.save

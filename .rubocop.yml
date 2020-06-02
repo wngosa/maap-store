@@ -39,8 +39,11 @@ Metrics/BlockLength:
 Style/FrozenStringLiteralComment:
   Enabled: false
 
+Metrics/MethodLength:
+  Max: 15
+
 Metrics/LineLength:
-  Max: 100
+  Max: 120
 
 Security/JSONLoad:
   Enabled: false

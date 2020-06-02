@@ -3,6 +3,8 @@ module Sheets
     include Interactor
 
     def call # rubocop:disable Metrics/AbcSize
+      Rails.logger.info "Saving file '#{context.record.file_name}' started"
+
       site_id = (context.record.site_id || 'unknown-site').to_s
       file_id = context.record.sheet_file.id.to_s
       original_filename = context.record.file_name.sub(".#{file_extension}", '')
@@ -14,6 +16,8 @@ module Sheets
         filename: filename
       )
       context.record.save!
+
+      Rails.logger.info "Saving file '#{context.record.file_name}' finished"
     end
 
     private

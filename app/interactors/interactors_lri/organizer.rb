@@ -1,13 +1,16 @@
-module AnonymizeLabRecordImport
+module InteractorsLRI
   class Organizer
     include Interactor::Organizer
 
-    organize Sheets::ReadSheet,
-             AnonymizeLabRecordImport::ObfuscatePatientIds,
+    organize InteractorsLRI::InsertLabRecords,
+             InteractorsLRI::HashPatientsInRecords,
+             Sheets::ReadSheet,
+             InteractorsLRI::HashPatientsInFile,
              Sheets::RemoveFields,
              Sheets::SaveSheet,
              Sheets::PurgeRowsFile,
-             S3::Upload
+             S3::Upload,
+             Harakiri
 
     def call # rubocop:disable AbcSize
       super
@@ -17,10 +20,9 @@ module AnonymizeLabRecordImport
       Rails.logger.info "Error when processing LabRecordImport #{context.record.id}"
       Rails.logger.info e.inspect
       context.record[context.state_attribute] = :error
-      context.record.error_message = 'Unknown error'
       context.record.raw_error_message = e.inspect
       context.record.save!
-      context
+      raise StandardError, e.inspect
     end
   end
 end

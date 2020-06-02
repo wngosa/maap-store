@@ -21,7 +21,7 @@ module Sheets
     }.freeze
 
     def call # rubocop:disable Metrics/MethodLength, Metrics/AbcSize
-      return if context.patient_ids || context.record.skip_obfuscation?
+      Rails.logger.info "Fields obfuscation in file '#{context.record.file_name}' started"
 
       (first_row..last_row).to_a.each do |row_number|
         columns_to_obfuscate.each do |column_number|
@@ -40,6 +40,8 @@ module Sheets
           end
         end
       end
+
+      Rails.logger.info "Fields obfuscation in file '#{context.record.file_name}' finished"
     end
 
     private

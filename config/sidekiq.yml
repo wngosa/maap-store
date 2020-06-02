@@ -1,5 +1,1 @@
 :concurrency: 1
-:schedule:
-  obfuscate_patient_ids:
-    cron: '0 */10 * * * *'
-    class: ObfuscatePatientIdsWorker
