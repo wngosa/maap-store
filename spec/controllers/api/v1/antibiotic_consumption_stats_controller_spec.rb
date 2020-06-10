@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Api::V1::AntibioticConsumptionStatsController, type: :controller do # rubocop:disable Metrics/LineLength
+RSpec.describe Api::V1::AntibioticConsumptionStatsController, type: :controller do
   describe 'GET /antibiotic_consumption_stats' do
     context 'with an unauthenticated user' do
       before { get :index }

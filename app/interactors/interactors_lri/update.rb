@@ -1,8 +1,8 @@
-module LabRecordImports
+module InteractorsLRI
   class Update
     include Interactor
 
-    def call # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
+    def call # rubocop:disable Metrics/AbcSize
       ActiveRecord::Base.transaction do
         lab_record_import.rows_file.purge
         lab_record_import.rows_file.attach(params[:rows_file])
@@ -16,6 +16,7 @@ module LabRecordImports
           )
         end
       end
+      AnonymizeLabRecordImportWorker.perform_async(lab_record_import.id)
     end
 
     private

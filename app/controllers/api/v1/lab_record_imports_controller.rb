@@ -1,10 +1,10 @@
 module Api
   module V1
     class LabRecordImportsController < ApplicationController
-      def create # rubocop:disable Metrics/MethodLength
+      def create
         lab_record_import = build_lab_record_import
         if lab_record_import.save
-          InsertLabRecordsWorker.perform_async(lab_record_import.id)
+          AnonymizeLabRecordImportWorker.perform_async(lab_record_import.id)
           render json: {
             id: lab_record_import.id,
             created_at: lab_record_import.created_at,
@@ -16,7 +16,7 @@ module Api
       end
 
       def update
-        interactor = LabRecordImports::Update.call(
+        interactor = InteractorsLRI::Update.call(
           lab_record_import: LabRecordImport.find(params[:id]),
           params: update_permitted_params
         )

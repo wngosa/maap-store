@@ -1,11 +1,13 @@
 require 'rubyXL/convenience_methods/cell'
 
-module AnonymizeLabRecordImport
-  class ObfuscatePatientIds
+module InteractorsLRI
+  class HashPatientsInFile
     include Interactor
 
     def call # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
-      return if !context.patient_ids || context.record.skip_obfuscation?
+      return if context.record.skip_obfuscation?
+
+      Rails.logger.info "Patients hashing in file '#{context.record.file_name}' started"
 
       header_cell =
         read_cell(
@@ -25,6 +27,8 @@ module AnonymizeLabRecordImport
           lab_record.patient_id
         )
       end
+
+      Rails.logger.info "Patients hashing in file '#{context.record.file_name}'' finished"
     end
 
     private

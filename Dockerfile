@@ -25,4 +25,4 @@ ENV RAILS_LOG_TO_STDOUT true
 
 EXPOSE $PORT
 
-CMD ./bin/update && bundle exec rails s -p 3000 -b '0.0.0.0'
+CMD ./bin/app_update && bundle exec rails s -p 3000 -b '0.0.0.0'

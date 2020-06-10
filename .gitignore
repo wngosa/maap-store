@@ -22,3 +22,5 @@ coverage
 public/system
 storage/**/*
 .env
+
+.DS_Store

@@ -6,7 +6,8 @@ module AnonymizeElectronicPharmacyStockRecord
              Sheets::RemoveFields,
              Sheets::SaveSheet,
              Sheets::PurgeRowsFile,
-             S3::Upload
+             S3::Upload,
+             Harakiri
 
     def call # rubocop:disable AbcSize
       super

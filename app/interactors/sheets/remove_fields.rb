@@ -21,7 +21,7 @@ module Sheets
     }.freeze
 
     def call # rubocop:disable Metrics/MethodLength, Metrics/AbcSize
-      return if context.patient_ids || context.record.skip_obfuscation?
+      Rails.logger.info "Fields obfuscation in file '#{context.record.file_name}' started"
 
       (first_row..last_row).to_a.each do |row_number|
         columns_to_obfuscate.each do |column_number|
@@ -34,12 +34,14 @@ module Sheets
             parse_date(read_cell(row_number - 1, column_number), date_format)
           if parsed_date
             update_cell(row_number - 1, column_number,
-                        parsed_date.beginning_of_month.strftime('%d/%m/%Y'))
+                        parsed_date.beginning_of_month.strftime(FORMATS[date_format.to_sym]))
           else
             update_cell(row_number - 1, column_number, INVALID_DATE)
           end
         end
       end
+
+      Rails.logger.info "Fields obfuscation in file '#{context.record.file_name}' finished"
     end
 
     private

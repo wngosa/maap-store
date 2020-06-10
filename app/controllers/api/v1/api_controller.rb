@@ -14,10 +14,18 @@ module Api
         render json: { error: error }, status: :bad_request
       end
 
-      def filter(collection) # rubocop:disable Metrics/AbcSize
+      def filter(collection)
         original_scope = collection.order(id: :asc)
-        s = original_scope.where('date_trunc(\'milliseconds\', updated_at) > ?', params[:updated_at_gth].to_datetime) if params[:updated_at_gth].present? # rubocop:disable Metrics/LineLength
-        s = (s || original_scope).or(original_scope.where('id > ?', params[:id_gth])) if params[:id_gth].present? # rubocop:disable Metrics/LineLength
+        if params[:updated_at_gth].present?
+          s = original_scope.where(
+            'date_trunc(\'milliseconds\', updated_at) > ?',
+            params[:updated_at_gth].to_datetime
+          )
+        end
+        if params[:id_gth].present?
+          s = (s || original_scope)
+              .or(original_scope.where('id > ?', params[:id_gth]))
+        end
         s || original_scope
       end
     end
