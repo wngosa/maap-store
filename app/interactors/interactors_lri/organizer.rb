@@ -22,6 +22,7 @@ module InteractorsLRI
       context.record[context.state_attribute] = :error
       context.record.raw_error_message = e.inspect
       context.record.save!
+      # Re-raise error here to force job to fail and be restarted again
       raise StandardError, e.inspect
     end
   end
