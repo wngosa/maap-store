@@ -1,7 +1,7 @@
 class AnonymizeElectronicPharmacyStockRecordWorker
   include Sidekiq::Worker
 
-  sidekiq_options retry: false
+  sidekiq_options retry: 3
 
   def perform(record_id)
     @record_id = record_id

@@ -18,7 +18,10 @@ module AnonymizeElectronicPharmacyStockRecord
       context.record.error_message = 'Unknown error'
       context.record.raw_error_message = e.inspect
       context.record.save!
-      context
+      # Force workers container to release retained memory
+      Harakiri.call
+      # Re-raise error here to force job to fail and be restarted again
+      raise StandardError, e.inspect
     end
   end
 end
