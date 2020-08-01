@@ -23,6 +23,8 @@ rescue ActiveRecord::PendingMigrationError => e
 end
 
 Dir[Rails.root.join('spec/support/**/*.rb')].each { |f| require f }
+require Rails.root.join('spec/support/files_examples/index.rb').to_s
+
 Shoulda::Matchers.configure do |config|
   config.integrate do |with|
     with.test_framework :rspec
