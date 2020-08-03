@@ -8,3 +8,9 @@ FactoryBot.define do
     site
   end
 end
+
+def lri_with_lab_records(count=5)
+  FactoryBot.create(:lab_record_import) do |lri|
+    FactoryBot.create_list(:lab_record, count, lab_record_import: lri)
+  end
+end
