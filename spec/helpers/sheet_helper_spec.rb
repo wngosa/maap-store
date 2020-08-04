@@ -29,16 +29,16 @@ RSpec.shared_examples "sheet read/update" do |sheet|
 end
 
 RSpec.describe "SheetHelper", type: :helper do
-  describe SheetHelper::CSVHelper do
-    csv_sheet = SheetHelper::CSVHelper.new([['first','second','third'],['a', 'b', 'c']])
-    include_examples "sheet read/update", SheetHelper::CSVHelper.new([['first','second','third'],['a', 'b', 'c']])
+  describe SheetHelper::CSV do
+    csv_sheet = SheetHelper::CSV.new([['first','second','third'],['a', 'b', 'c']])
+    include_examples "sheet read/update", csv_sheet
   end
 
-  describe SheetHelper::XLSHelper do
+  describe SheetHelper::XLS do
     worksheet = Spreadsheet::Workbook.new.create_worksheet
     worksheet.row(0).concat %w{first second third}
     worksheet.row(1).concat %w{a b c}
-    xls_sheet = SheetHelper::XLSHelper.new(worksheet)
+    xls_sheet = SheetHelper::XLS.new(worksheet)
     include_examples "sheet read/update", xls_sheet
   end
 end

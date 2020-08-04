@@ -1,5 +1,7 @@
 module SheetHelper
-  class CSVHelper
+  class CSV
+    attr_reader :sheet_file
+
     def initialize(sheet_file)
       @sheet_file = sheet_file
     end
@@ -13,17 +15,19 @@ module SheetHelper
     end
   end
 
-  class XLSHelper
-    def initialize(worksheet)
-      @worksheet = worksheet
+  class XLS
+    attr_reader :sheet_file
+
+    def initialize(sheet_file)
+      @sheet_file = sheet_file
     end
 
     def read(row, col)
-      @worksheet[row, col]
+      @sheet_file[row, col]
     end
 
     def update_cell(row, col, content)
-      @worksheet[row, col] = content
+      @sheet_file[row, col] = content
     end
   end
 end

@@ -24,8 +24,7 @@ module Sheets
       rescue NoMethodError, Zip::Error
         Rails.logger.info 'Falling back to spreadsheet gem'
         context.sheet_type = :xls
-        context.sheet_file = Spreadsheet.open(context.sheet_path)
-        context.current_sheet = context.sheet_file.worksheets[0]
+        context.sheet_file = Spreadsheet.open(context.sheet_path).worksheets[0]
       end
     rescue Ole::Storage::FormatError => e
       Rails.logger.info e
