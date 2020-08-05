@@ -49,4 +49,8 @@ RSpec.configure do |config|
   config.infer_spec_type_from_file_location!
 
   config.filter_rails_from_backtrace!
+
+  config.after(:suite) do
+    FileUtils.rm_rf(Dir[Rails.root.join("tmp/storage").to_s])
+  end
 end
