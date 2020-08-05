@@ -1,7 +1,7 @@
 require 'rubyXL/convenience_methods/cell'
 
 module Sheets
-  class RemoveFields
+  class ObfuscateFields
     include Interactor
 
     OBFUSCATED_TEXT = 'Not available'.freeze
