@@ -88,7 +88,7 @@ RSpec.describe InteractorsLRI::HashPatientsInFile, type: :interactor do
   end
 
   describe "Invalid Format" do
-    it "raises error when form isn't neither CSV nor XLS" do
+    it "raises error when format is neither CSV nor XLS" do
       expect {
         InteractorsLRI::HashPatientsInFile.call(
           record: create(:lab_record_import), 
