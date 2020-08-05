@@ -6,37 +6,41 @@ module Sheets
 
     OBFUSCATED_TEXT = 'Not available'.freeze
     INVALID_DATE = 'Invalid date format'.freeze
-    FORMATS = {
-      'DD/MM/YYYY': '%d/%m/%Y',
-      'DD/MM/YY': '%d/%m/%y',
-      'MM/DD/YYYY': '%m/%d/%Y',
-      'MM/DD/YY': '%m/%d/%y',
-      DDMMMYYYY: '%d%b%Y',
-      DDMMMYY: '%d%b%y',
-      'MM-DD-YYYY': '%m-%d-%Y',
-      'MM-DD-YY': '%m-%d-%y',
-      'DD-MM-YYYY': '%d-%m-%Y',
-      'DD-MM-YY': '%d-%m-%y',
-      'YYYY-MM-DD': '%Y-%m-%d'
-    }.freeze
 
     def call # rubocop:disable Metrics/MethodLength, Metrics/AbcSize
       Rails.logger.info "Fields obfuscation in file '#{context.record.file_name}' started"
 
+      sheet_file = nil
+      if context.sheet_type == :csv 
+        sheet_file = SheetHelper::CSV.new(context.sheet_file)
+      elsif context.sheet_type == :xls
+        sheet_file = SheetHelper::XLS.new(context.sheet_file)
+      else
+        raise StandardError.new "Only XLS and CSV format supported"
+      end
+
       (first_row..last_row).to_a.each do |row_number|
         columns_to_obfuscate.each do |column_number|
-          update_cell(row_number - 1, column_number, OBFUSCATED_TEXT)
+          sheet_file.update_cell(row_number - 1, column_number, OBFUSCATED_TEXT)
         end
 
         date_columns.each do |column|
           date_format, column_number = column
           parsed_date =
-            parse_date(read_cell(row_number - 1, column_number), date_format)
+            DateHelper.parse_date(
+              sheet_file.read(row_number - 1, column_number), 
+              date_format
+            )
           if parsed_date
-            update_cell(row_number - 1, column_number,
-                        parsed_date.beginning_of_month.strftime(FORMATS[date_format.to_sym]))
+            sheet_file.update_cell(
+              row_number - 1, 
+              column_number,
+              parsed_date.beginning_of_month.strftime(
+                DateHelper::FORMATS_DICTIONARY[date_format.to_sym]
+              )
+            )
           else
-            update_cell(row_number - 1, column_number, INVALID_DATE)
+            sheet_file.update_cell(row_number - 1, column_number, INVALID_DATE)
           end
         end
       end
@@ -45,42 +49,6 @@ module Sheets
     end
 
     private
-
-    def parse_date(date, format)
-      return date if date.is_a?(DateTime) || date.is_a?(Date)
-
-      Date.strptime(date, FORMATS[format.to_sym])
-    rescue ArgumentError, TypeError
-      nil
-    end
-
-    def read_cell(row, col)
-      return read_xls(row, col) if context.sheet_type == :xls
-
-      read_csv(row, col)
-    end
-
-    def read_csv(row, col)
-      context.sheet_file[row][col]
-    end
-
-    def read_xls(row, col)
-      context.sheet_file[row, col]
-    end
-
-    def update_cell(row, col, content)
-      return update_cell_xls(row, col, content) if context.sheet_type == :xls
-
-      update_cell_csv(row, col, content)
-    end
-
-    def update_cell_csv(row, col, content)
-      context.sheet_file[row][col] = content
-    end
-
-    def update_cell_xls(row, col, content)
-      context.sheet_file[row, col] = content
-    end
 
     def date_columns
       @date_columns ||=

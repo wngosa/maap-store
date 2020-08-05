@@ -13,7 +13,7 @@ module DateHelper
     'YYYY-MM-DD': '%Y-%m-%d'
   }.freeze
 
-  def parse_date(date, format)
+  def self.parse_date(date, format)
     return date if date.is_a?(DateTime) || date.is_a?(Date)
 
     Date.strptime(date, FORMATS_DICTIONARY[format.to_sym])

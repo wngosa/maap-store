@@ -1,5 +1,4 @@
 require 'rails_helper'
-include DateHelper
 
 RSpec.describe "DateHelper" do
   describe "FORMATS DICTIONARY" do
@@ -79,7 +78,7 @@ RSpec.describe "DateHelper" do
 
     it "returns nil on incorrect format" do
       expect(
-        parse_date("2020-05-08", "DD/MM/YY")
+        DateHelper.parse_date("2020-05-08", "DD/MM/YY")
       ).to be_nil
     end
   end
