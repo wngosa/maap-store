@@ -35,6 +35,7 @@ module Sheets
     end
 
     def save_xls
+      context.sheet_path = "#{context.sheet_path}.xls"
       context.sheet_file.workbook.write(context.sheet_path)
     end
 

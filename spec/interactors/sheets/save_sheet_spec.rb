@@ -20,7 +20,7 @@ RSpec.describe 'SaveSheet' do
       sheet_with_changes
     end
 
-    it 'reads file in xls format' do
+    it 'saves file in xls format' do
       sheet_path = ActiveStorage::Blob.service.send(
         :path_for,
         lab_record_import.sheet_file.key
@@ -84,7 +84,7 @@ RSpec.describe 'SaveSheet' do
       sheet_with_changes
     end
 
-    it 'reads file in xls format' do
+    it 'saves file with csv format' do
       sheet_path = ActiveStorage::Blob.service.send(
         :path_for,
         lab_record_import.sheet_file.key
