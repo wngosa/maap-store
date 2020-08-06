@@ -1,15 +1,15 @@
 require 'rails_helper'
-include AttachmentHelpers
 
 RSpec.describe InteractorsLRI::InsertLabRecords, type: :interactor do
-  it "creates lab records when rows_file has rows" do
-    l = create(:lab_record_import, patient_or_lab_record_id: ["patientId","labRecordId"].to_json) 
+  include AttachmentHelpers
+  it 'creates lab records when rows_file has rows' do
+    l = create(:lab_record_import, patient_or_lab_record_id: %w[patientId labRecordId].to_json)
     rows = [
       {
-        "content" => [{"w" => "James P."}, {"w" => "Foo Hospital"}]
+        'content' => [{ 'w' => 'James P.' }, { 'w' => 'Foo Hospital' }]
       },
       {
-        "content" => [{"w" => "Marry D."}, {"w" => "Bar Laboratory"}]
+        'content' => [{ 'w' => 'Marry D.' }, { 'w' => 'Bar Laboratory' }]
       }
     ]
 
@@ -17,14 +17,14 @@ RSpec.describe InteractorsLRI::InsertLabRecords, type: :interactor do
       InteractorsLRI::InsertLabRecords.call(record: l)
 
       rows.zip(LabRecord.all) do |row, lab_record|
-        expect(lab_record.patient_id).to eq(row["content"][l.patient_id_index]["w"])
-        expect(lab_record.patient_id_state).to eq("pending")
+        expect(lab_record.patient_id).to eq(row['content'][l.patient_id_index]['w'])
+        expect(lab_record.patient_id_state).to eq('pending')
       end
     end
   end
 
-  it "doesn't create lab records if rows_file has no rows" do 
-    l = create(:lab_record_import, patient_or_lab_record_id: ["patientId","labRecordId"].to_json) 
+  it "doesn't create lab records if rows_file has no rows" do
+    l = create(:lab_record_import, patient_or_lab_record_id: %w[patientId labRecordId].to_json)
     rows = []
 
     with_rows_file_attached(l, rows) do
@@ -38,10 +38,10 @@ RSpec.describe InteractorsLRI::InsertLabRecords, type: :interactor do
 
     rows = [
       {
-        "content" => [{"w" => "James P."}, {"w" => "Foo Hospital"}]
+        'content' => [{ 'w' => 'James P.' }, { 'w' => 'Foo Hospital' }]
       },
       {
-        "content" => [{"w" => "Marry D."}, {"w" => "Bar Laboratory"}]
+        'content' => [{ 'w' => 'Marry D.' }, { 'w' => 'Bar Laboratory' }]
       }
     ]
 

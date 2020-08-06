@@ -11,12 +11,12 @@ module Sheets
       Rails.logger.info "Fields obfuscation in file '#{context.record.file_name}' started"
 
       sheet_file = nil
-      if context.sheet_type == :csv 
+      if context.sheet_type == :csv
         sheet_file = SheetHelper::CSV.new(context.sheet_file)
       elsif context.sheet_type == :xls
         sheet_file = SheetHelper::XLS.new(context.sheet_file)
       else
-        raise StandardError.new "Only XLS and CSV format supported"
+        raise StandardError, 'Only XLS and CSV format supported'
       end
 
       (first_row..last_row).to_a.each do |row_number|
@@ -28,12 +28,12 @@ module Sheets
           date_format, column_number = column
           parsed_date =
             DateHelper.parse_date(
-              sheet_file.read(row_number - 1, column_number), 
+              sheet_file.read(row_number - 1, column_number),
               date_format
             )
           if parsed_date
             sheet_file.update_cell(
-              row_number - 1, 
+              row_number - 1,
               column_number,
               parsed_date.beginning_of_month.strftime(
                 DateHelper::FORMATS_DICTIONARY[date_format.to_sym]

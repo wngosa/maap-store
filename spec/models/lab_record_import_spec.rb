@@ -1,19 +1,19 @@
 require 'rails_helper'
 
 RSpec.describe LabRecordImport, type: :model do
-  it "skips obfuscation if patient_or_lab_record_id is empty" do
-    import_without_patient_lab_id = create(:lab_record_import, patient_or_lab_record_id: "[]")
+  it 'skips obfuscation if patient_or_lab_record_id is empty' do
+    import_without_patient_lab_id = create(:lab_record_import, patient_or_lab_record_id: '[]')
 
     expect(import_without_patient_lab_id.skip_obfuscation?).to eq(true)
   end
 
-  it "skips obfuscation if phi is empty" do
-    import_without_phi = create(:lab_record_import, phi: "[]")
+  it 'skips obfuscation if phi is empty' do
+    import_without_phi = create(:lab_record_import, phi: '[]')
 
     expect(import_without_phi.skip_obfuscation?).to eq(true)
   end
 
-  it "obfuscates if both `patient_or_lab_record_id` and `phi` are non-empty" do
+  it 'obfuscates if both `patient_or_lab_record_id` and `phi` are non-empty' do
     expect(create(:lab_record_import).skip_obfuscation?).to eq(false)
   end
 end
