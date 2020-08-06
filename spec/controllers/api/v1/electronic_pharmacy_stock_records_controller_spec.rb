@@ -4,6 +4,7 @@ RSpec.describe Api::V1::ElectronicPharmacyStockRecordsController, type: :control
   let(:site) { create(:site) }
   context 'create electronic pharmacy stock records' do
     before do
+      allow(AnonymizeElectronicPharmacyStockRecordWorker).to receive(:perform_async)
       post :create, params: { site_id: site.id }
     end
     it 'returns id and timestamps as JSON' do

@@ -4,6 +4,7 @@ RSpec.describe Api::V1::LabRecordImportsController, type: :controller do
   let(:site) { create(:site) }
   context 'create lab records' do
     before do
+      allow(AnonymizeLabRecordImportWorker).to receive(:perform_async)
       post :create, params: { site_id: site.id }
     end
     it 'returns id and timestamps as JSON' do
