@@ -42,8 +42,7 @@ RSpec.describe 'ReadSheet' do
   it 'raises error when reading file with xlsx format' do
     lab_record_import.sheet_file.attach(
       io: File.open(EXAMPLE_XLSX_PATH),
-      filename: 'example_xlsx',
-      content_type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+      filename: 'example_xlsx'
     )
 
     expect do
