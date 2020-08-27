@@ -5,9 +5,10 @@ RSpec.describe Api::V1::LabRecordImportsController, type: :controller do
   context 'create lab records' do
     before do
       allow(AnonymizeLabRecordImportWorker).to receive(:perform_async)
-      post :create, params: { site_id: site.id }
     end
     it 'returns id and timestamps as JSON' do
+      post :create, params: { site_id: site.id }
+
       json_response = JSON.parse(response.body)
       l = LabRecordImport.first
 

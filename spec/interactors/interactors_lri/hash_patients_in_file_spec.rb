@@ -25,7 +25,7 @@ RSpec.shared_examples 'hash patient ids in file' do |params|
     expect(sheet_file.read(0, 1)).to eq('Patient Id')
   end
 
-  it 'overwrites cells containing patients ids' do
+  it 'hashes cells containing patients ids' do
     sheet_file = hashed_patients
 
     create(
