@@ -3,7 +3,7 @@ module AnonymizeElectronicPharmacyStockRecord
     include Interactor::Organizer
 
     organize Sheets::ReadSheet,
-             Sheets::RemoveFields,
+             Sheets::ObfuscateFields,
              Sheets::SaveSheet,
              Sheets::PurgeRowsFile,
              S3::Upload,

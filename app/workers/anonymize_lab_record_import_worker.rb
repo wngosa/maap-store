@@ -3,13 +3,12 @@ class AnonymizeLabRecordImportWorker
 
   sidekiq_options retry: 3
 
-  def perform(lab_record_import_id, patient_ids = false)
+  def perform(lab_record_import_id)
     @lab_record_import_id = lab_record_import_id
     logger.info "Starting anonymization of #{lab_record_import.id}"
 
     InteractorsLRI::Organizer.call(
       record: lab_record_import,
-      patient_ids: patient_ids,
       state_attribute: :patient_id_state
     )
 

@@ -6,7 +6,7 @@ module InteractorsLRI
              InteractorsLRI::HashPatientsInRecords,
              Sheets::ReadSheet,
              InteractorsLRI::HashPatientsInFile,
-             Sheets::RemoveFields,
+             Sheets::ObfuscateFields,
              Sheets::SaveSheet,
              Sheets::PurgeRowsFile,
              S3::Upload,

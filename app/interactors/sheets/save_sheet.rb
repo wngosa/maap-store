@@ -6,6 +6,8 @@ module Sheets
       Rails.logger.info "Saving file '#{context.record.file_name}' started"
 
       site_id = (context.record.site_id || 'unknown-site').to_s
+      # TODO. Fix filename. `file_id` actually belogs to previous file id,
+      # which is deleted after attaching the new one
       file_id = context.record.sheet_file.id.to_s
       original_filename = context.record.file_name.sub(".#{file_extension}", '')
       filename = "#{file_id}-#{original_filename}-#{site_id}.#{file_extension}"
@@ -24,7 +26,6 @@ module Sheets
 
     def save_file!
       return save_xls if context.sheet_type == :xls
-      return save_xlsx if context.sheet_type == :xlsx
 
       save_csv
     end
@@ -34,12 +35,8 @@ module Sheets
     end
 
     def save_xls
-      save_xlsx
-    end
-
-    def save_xlsx
-      context.sheet_path = "#{context.sheet_path}.xlsx"
-      context.sheet_file.write(context.sheet_path)
+      context.sheet_path = "#{context.sheet_path}.xls"
+      context.sheet_file.workbook.write(context.sheet_path)
     end
 
     def file_extension

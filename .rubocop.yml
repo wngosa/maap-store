@@ -54,4 +54,7 @@ Security/JSONLoad:
 Security/Open:
   Enabled: false
 
+Rails/HelperInstanceVariable:
+  Enabled: false
+
 
